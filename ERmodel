@@ -127,7 +127,6 @@ HGVSp varchar(50)
 HGVSp_Short varchar(50)
 RefSeq varchar(50)
 Codons varchar(50)
-Consequence varchar(50)
 Protein_position int
 Transcript_ID varchar(50)
 
