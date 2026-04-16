@@ -106,11 +106,6 @@ mutation_id int FK -< mutations.mutation_id
 consequence_id int FK -< consequence.consequence_id
 (mutation_id, consequence_id) PK
 
-experiment
--
-experiment_id int PK
-Sample_Id int FK -< sample.Sample_Id
-
 mutations
 -
 mutation_id int PK
