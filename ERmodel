@@ -8,12 +8,15 @@ COHORT varchar
 admission
 -
 case_id int PK
+Sample_Id int PK FK -< sample.Sample_Id
 PATIENT_ID int FK -< patient.PATIENT_ID
 SMOKING_STATUS varchar(50)
 SMOKING_PACK_YEARS int
 date_of_record date
 OS_STATUS bool
 OS_MONTHS int
+patient_age int
+
 
 treatment
 -
@@ -32,20 +35,17 @@ chemotherapy_name varchar(100)
 sample
 -
 Sample_Id int PK
-case_id int FK -< admission.case_id
-PATIENT_ID int FK -< patient.PATIENT_ID
-patient_age int
 STAGE varchar(50)
 PURITY float
 SAMPLE_TYPE_ID int FK -< sample_type.SAMPLE_TYPE_ID
 SOMATIC_STATUS varchar(50)
 TMB_NONSYNONYMOUS float
-ONCOTREE_CODE FK -< cancer_type.ONCOTREE_CODE
+ONCOTREE_CODE varchar(50) FK -< cancer_type.ONCOTREE_CODE
 HISTOLOGICAL_GRADE varchar(50)
 EXOME_SEQ bool
 RNA_SEQ_ANALYSIS bool
 SEQUENCING_TYPE varchar(50)
-Tumor_Sample_Barcode varchar(100) UNIQUE
+Tumor_Sample_Barcode varchar(100)
 
 sample_type
 -
@@ -71,13 +71,14 @@ cancer_type
 ONCOTREE_CODE varchar(100) PK
 CANCER_TYPE varchar(100)
 CANCER_TYPE_DETAILED varchar(100)
-ADENOCARCINOMA_SUBTYPE_WHO2015 varchar(100)
 
-patient_cancer
+cancer_subtype
 -
-PATIENT_ID FK >- patient.PATIENT_ID
-oncotree_code FK >- cancer_type.ONCOTREE_CODE
-(patient_id, oncotree_code) PK
+subtype_id int PK
+ONCOTREE_CODE varchar(100) FK -< cancer_type.ONCOTREE_CODE
+SUBTYPE_MAIN varchar(100)
+SUBTYPE_DETAIL varchar(100)
+ICD_CODE int
 
 gene
 -
@@ -85,8 +86,7 @@ gene_id int PK
 Entrez_Gene_Id varchar(50) 
 Hugo_Symbol varchar
 NCBI_Build varchar(50)
-Chromosome varchar(50)
-Strand char
+
 
 gene-sample
 -
@@ -109,14 +109,16 @@ consequence_id int FK -< consequence.consequence_id
 mutations
 -
 mutation_id int PK
+Start_Position int
+End_Position int
+Chromosome varchar(50)
+Strand char
 gene_id int FK -< gene.gene_id
 Variant_Classification varchar(50)
 Variant_Type varchar(50)
 Reference_Allele varchar(50)
 Hotspot bool
 Amino_acid_change varchar(50)
-Start_Position int
-End_Position int
 HGVSc varchar(50)
 HGVSp varchar(50)
 HGVSp_Short varchar(50)
