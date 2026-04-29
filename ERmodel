@@ -28,7 +28,6 @@ TKI_TREATMENT bool
 sample
 -
 Sample_Id int PK
-PATIENT_ID int FK -< patient.PATIENT_ID
 case_id int FK -< admission.case_id
 PURITY DECIMAL(5,4)
 SAMPLE_TYPE_ID VARCHAR(50) FK -< sample_type.SAMPLE_TYPE_ID
