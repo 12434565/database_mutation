@@ -10,11 +10,12 @@ admission
 case_id int PK
 PATIENT_ID int FK -< patient.PATIENT_ID
 SMOKING_STATUS varchar(50)
-SMOKING_PACK_YEARS int
-date_of_record date
+SMOKING_PACK_YEARS DECIMAL(6,2)
 OS_STATUS bool
-OS_MONTHS int
+OS_MONTHS DECIMAL(6,2) 
 patient_age int
+STAGE varchar(50)
+
 
 
 treatment
@@ -29,15 +30,14 @@ sample
 Sample_Id int PK
 PATIENT_ID int FK -< patient.PATIENT_ID
 case_id int FK -< admission.case_id
-STAGE varchar(50)
 PURITY float
-SAMPLE_TYPE_ID int FK -< sample_type.SAMPLE_TYPE_ID
+SAMPLE_TYPE_ID VARCHAR(50) FK -< sample_type.SAMPLE_TYPE_ID
 SOMATIC_STATUS varchar(50)
 TMB_NONSYNONYMOUS float
 ONCOTREE_CODE varchar(50) FK -< cancer_type.ONCOTREE_CODE
 HISTOLOGICAL_GRADE varchar(50)
-EXOME_SEQ bool
-RNA_SEQ_ANALYSIS bool
+EXOME_SEQ VARCHAR(50)
+RNA_SEQ_ANALYSIS VARCHAR(50)
 SEQUENCING_TYPE varchar(50)
 Tumor_Sample_Barcode varchar(100)
 
@@ -91,13 +91,15 @@ mRNA_expression DECIMAL(10,5)
 consequence
 -
 consequence_id int PK
-consequence_type varchar(100)
+consequence_type varchar(100) UNIQUE
 
-mutation_consequence
+mutation_annotation
 -
 mutation_id int FK -< mutations.mutation_id
 consequence_id int FK -< consequence.consequence_id
-(mutation_id, consequence_id) PK
+Transcript_ID varchar(50)
+RefSeq varchar(50)
+(mutation_id,consequence_id,Transcript_ID) PK
 
 mutations
 -
@@ -111,15 +113,12 @@ gene_id int FK -< gene.gene_id
 Variant_Classification varchar(50)
 Variant_Type varchar(50)
 Reference_Allele varchar(50)
-Hotspot bool
 Amino_acid_change varchar(50)
 HGVSc varchar(50)
 HGVSp varchar(50)
 HGVSp_Short varchar(50)
-RefSeq varchar(50)
 Codons varchar(50)
 Protein_position int
-Transcript_ID varchar(50)
 
 
 sample_mutation
