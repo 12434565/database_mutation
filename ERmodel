@@ -30,10 +30,10 @@ sample
 Sample_Id int PK
 PATIENT_ID int FK -< patient.PATIENT_ID
 case_id int FK -< admission.case_id
-PURITY float
+PURITY DECIMAL(5,4)
 SAMPLE_TYPE_ID VARCHAR(50) FK -< sample_type.SAMPLE_TYPE_ID
 SOMATIC_STATUS varchar(50)
-TMB_NONSYNONYMOUS float
+TMB_NONSYNONYMOUS DECIMAL(10,6)
 ONCOTREE_CODE varchar(50) FK -< cancer_type.ONCOTREE_CODE
 HISTOLOGICAL_GRADE varchar(50)
 EXOME_SEQ VARCHAR(50)
@@ -49,16 +49,16 @@ SAMPLE_CLASS varchar(50)
 score
 -
 Sample_Id int PK FK -< sample.Sample_Id
-IMSIG_B_CELLS float
-IMSIG_INTERFERON float
-IMSIG_MACROPHAGES float
-IMSIG_MONOCYTES float
-IMSIG_NEUTROPHILS float
-IMSIG_NK_CELLS float
-IMSIG_PLASMA_CELLS float
-IMSIG_PROLIFERATION float
-IMSIG_T_CELLS float
-IMSIG_TRANSLATION float
+IMSIG_B_CELLS DECIMAL(10,6)
+IMSIG_INTERFERON DECIMAL(10,6)
+IMSIG_MACROPHAGES DECIMAL(10,6)
+IMSIG_MONOCYTES DECIMAL(10,6)
+IMSIG_NEUTROPHILS DECIMAL(10,6)
+IMSIG_NK_CELLS DECIMAL(10,6)
+IMSIG_PLASMA_CELLS DECIMAL(10,6)
+IMSIG_PROLIFERATION DECIMAL(10,6)
+IMSIG_T_CELLS DECIMAL(10,6)
+IMSIG_TRANSLATION DECIMAL(10,6)
 
 cancer_type
 -
@@ -105,6 +105,8 @@ HGVSp_Short varchar(50)
 Codons varchar(50)
 Protein_position int
 (mutation_id,consequence_id,Transcript_ID) PK
+Amino_acid_change varchar(50)
+
 
 mutations
 -
@@ -118,7 +120,6 @@ gene_id int FK -< gene.gene_id
 Variant_Classification varchar(50)
 Variant_Type varchar(50)
 Reference_Allele varchar(50)
-Amino_acid_change varchar(50)
 
 
 sample_mutation
