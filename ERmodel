@@ -49,7 +49,7 @@ Tumor_Sample_Barcode varchar(100)
 
 sample_type
 -
-SAMPLE_TYPE_ID int PK
+SAMPLE_TYPE_ID VARCHAR(50) PK
 SAMPLE_CLASS varchar(50)
 
 score
