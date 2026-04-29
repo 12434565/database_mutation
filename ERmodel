@@ -99,6 +99,11 @@ mutation_id int FK -< mutations.mutation_id
 consequence_id int FK -< consequence.consequence_id
 Transcript_ID varchar(50)
 RefSeq varchar(50)
+HGVSc varchar(50)
+HGVSp varchar(50)
+HGVSp_Short varchar(50)
+Codons varchar(50)
+Protein_position int
 (mutation_id,consequence_id,Transcript_ID) PK
 
 mutations
@@ -114,11 +119,6 @@ Variant_Classification varchar(50)
 Variant_Type varchar(50)
 Reference_Allele varchar(50)
 Amino_acid_change varchar(50)
-HGVSc varchar(50)
-HGVSp varchar(50)
-HGVSp_Short varchar(50)
-Codons varchar(50)
-Protein_position int
 
 
 sample_mutation
