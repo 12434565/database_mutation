@@ -21,14 +21,8 @@ treatment
 -
 treatment_id int PK
 case_id int FK -< admission.case_id
-chemotherapy_id int FK -< chemotherapy.chemotherapy_id
-TKI_TREATMENT bool
-
-chemotherapy
--
-chemotherapy_id int PK
 chemotherapy_state bool
-chemotherapy_name varchar(100)
+TKI_TREATMENT bool
 
 sample
 -
