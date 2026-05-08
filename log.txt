@@ -1,0 +1,84 @@
+.
+├── 01create_table.sql
+├── 02load_independent_table.sql
+├── 03load_dependent_table.sql
+├── ERmodel
+├── README.md
+├── extract.py
+├── get_sql_data01.py
+├── get_sql_data02.py
+├── log.txt
+├── luad_oncosg_2020
+│   ├── LICENSE
+│   ├── [done]data_clinical_patient.txt
+│   ├── [done]data_clinical_sample.txt
+│   ├── [done]data_mrna_seq_v2_rsem_zscores_ref_all_samples.txt
+│   ├── [done]data_mutations.txt
+│   ├── data
+│   │   ├── 01patient_table.csv
+│   │   ├── 02cancer_type_table.csv
+│   │   ├── 03subtype_table.csv
+│   │   ├── 04sample_type_table.csv
+│   │   ├── 05gene_table.csv
+│   │   ├── 06consequence_table.csv
+│   │   ├── 07admission_table.csv
+│   │   ├── 08sample_table.csv
+│   │   ├── 09score_table.csv
+│   │   ├── 10treatment_table.csv
+│   │   ├── 11mutation_table.csv
+│   │   ├── 12sample_mutation_table.csv
+│   │   ├── 13mutation_annotation_table.csv
+│   │   ├── 14gene_sample_table.csv
+│   │   ├── data_from_sql
+│   │   │   ├── 01patient_mapping.csv
+│   │   │   └── 02case_mapping.csv
+│   │   └── gene_patch.csv
+│   ├── log.md
+│   └── useless_files
+│       ├── [skip]data_cna.txt
+│       ├── [skip]data_cna_hg19.seg
+│       ├── [skip]data_gene_panel_matrix.txt
+│       ├── [skip]data_mrna_seq_v2_rsem_zscores_ref_diploid_samples.txt
+│       ├── [skip]data_mutsig.txt
+│       ├── [skip]data_sv.txt
+│       ├── case_lists
+│       │   ├── cases_RNA_Seq_v2_mRNA.txt
+│       │   ├── cases_all.txt
+│       │   ├── cases_cna.txt
+│       │   ├── cases_cnaseq.txt
+│       │   ├── cases_complete.txt
+│       │   ├── cases_sequenced.txt
+│       │   └── cases_sv.txt
+│       ├── meta_clinical_patient.txt
+│       ├── meta_clinical_sample.txt
+│       ├── meta_cna.txt
+│       ├── meta_cna_hg19_seg.txt
+│       ├── meta_gene_panel_matrix.txt
+│       ├── meta_mrna_seq_v2_rsem_zscores_ref_all_samples.txt
+│       ├── meta_mrna_seq_v2_rsem_zscores_ref_diploid_samples.txt
+│       ├── meta_mutations.txt
+│       ├── meta_mutsig.txt
+│       ├── meta_study.txt
+│       └── meta_sv.txt
+├── neo4j1
+│   ├── admission.csv
+│   ├── gene.csv
+│   ├── gene_sample_filtered.csv
+│   ├── mutation.csv
+│   ├── mutation_big_table.csv
+│   ├── patient.csv
+│   ├── sample.csv
+│   ├── sample_big_table.csv
+│   └── sample_mutation.csv
+├── neo4j11.py
+├── scripts
+│   ├── 01extract.py
+│   ├── 02get_sql_data01.py
+│   ├── 03get_sql_data02.py
+│   └── 04neo4j11.py
+└── sql
+    ├── 01create_table.sql
+    ├── 02load_independent_table.sql
+    └── 03load_dependent_table.sql
+
+9 directories, 73 files
