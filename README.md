@@ -1,6 +1,6 @@
-# database_mutation
-
 <div align="center">
+
+<h1>database_mutation</h1>
 
 **A staged Python + MySQL pipeline for turning LUAD mutation, clinical, and expression files into a normalized relational database and Neo4j-ready CSV exports.**
 
