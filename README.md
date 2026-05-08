@@ -27,13 +27,13 @@ This project transforms the **LUAD (OncoSG, 2020)** study files into a structure
 
 ```mermaid
 flowchart LR
-    A["Raw LUAD study files<br/>clinical + mutation + expression"] --> B["scripts/01extract.py<br/>clean and stage CSV tables"]
+    A["Raw LUAD study files<br/>clinical + mutation + expression"] --> B["01extract.py<br/>clean and stage CSV tables"]
     B --> C["luad_oncosg_2020/data/<br/>01-14 CSV outputs"]
-    D["sql/01create_table.sql<br/>create 14-table schema"] --> E["sql/02load_independent_table.sql<br/>load independent tables"]
+    D["01create_table.sql<br/>create 14-table schema"] --> E["02load_independent_table.sql<br/>load independent tables"]
     C --> E
-    E --> F["sql/03load_dependent_table.sql<br/>load dependent tables"]
+    E --> F["03load_dependent_table.sql<br/>load dependent tables"]
     F --> G["MySQL database<br/>luad_oncosg"]
-    G --> H["scripts/04neo4j11.py<br/>export graph-ready CSVs"]
+    G --> H["04neo4j11.py<br/>export graph-ready CSVs"]
     H --> I["neo4j1/<br/>patient, sample, mutation, join tables"]
 ```
 
@@ -41,8 +41,11 @@ flowchart LR
 
 | Path | Purpose |
 | --- | --- |
-| [`scripts/`](scripts) | Preferred home for the numbered Python pipeline scripts |
-| [`sql/`](sql) | Preferred home for the numbered SQL schema/load scripts |
+| Root numbered `.py` and `.sql` files | Recommended entry points for running the project because their paths match the original file structure used during development |
+| [`scripts/`](scripts) | Organized mirror copies of the Python scripts, kept mainly for cleaner browsing and presentation |
+| [`sql/`](sql) | Organized mirror copies of the SQL files, kept mainly for cleaner browsing and presentation |
+| [`luad_oncosg.sql`](luad_oncosg.sql) | Full MySQL dump and recommended one-file restore target from the repository root |
+| [`sql/luad_oncosg.sql`](sql/luad_oncosg.sql) | Duplicate copy of the same dump inside the organized `sql/` directory |
 | [`luad_oncosg_2020/`](luad_oncosg_2020) | Source study files, generated staging CSVs, notes, and reference metadata |
 | [`luad_oncosg_2020/data/`](luad_oncosg_2020/data) | Generated CSV tables used for MySQL import |
 | [`luad_oncosg_2020/data/data_from_sql/`](luad_oncosg_2020/data/data_from_sql) | Mapping files exported from MySQL auto-increment keys |
@@ -50,7 +53,7 @@ flowchart LR
 | [`neo4j1/`](neo4j1) | Graph-oriented CSV exports and denormalized join outputs |
 | [`ERmodel`](ERmodel) | Plain-text entity relationship model for the relational design |
 | [`luad_oncosg_2020/log.md`](luad_oncosg_2020/log.md) | Working notes about the source file fields and study content |
-| Root numbered files | Duplicates of the organized copies in `scripts/` and `sql/` |
+| Organized directory copies | Alternate copies arranged for readability; use the root numbered files when in doubt |
 
 ## Data Source Summary
 
@@ -74,9 +77,15 @@ The main raw inputs committed in this repository are:
 
 ### Software
 
-- Python 3.10+ recommended
-- MySQL 8.x recommended
-- Optional: Neo4j, if you want to use the graph export files downstream
+- Python `3.12.8` confirmed in the current local environment
+- MySQL CLI `5.7.24` confirmed in the current local environment
+- Neo4j `2.1.4` available for downstream graph use
+
+Compatibility note:
+
+- The committed dump file [`luad_oncosg.sql`](luad_oncosg.sql) was generated with MySQL dump client `5.7.24`
+- The dump header reports MySQL server version `8.0.30`
+- If you restore on a different MySQL server version, check for compatibility differences before assuming the dump is broken
 
 ### Python Dependencies
 
@@ -97,12 +106,12 @@ pip install pandas PyMySQL
 
 This repository contains **hard-coded local paths** and **placeholder database credentials** copied from the original development environment. Before rerunning the pipeline, update these values in the Python and SQL files:
 
-- `scripts/01extract.py`
-- `scripts/02get_sql_data01.py`
-- `scripts/03get_sql_data02.py`
-- `scripts/04neo4j11.py`
-- `sql/02load_independent_table.sql`
-- `sql/03load_dependent_table.sql`
+- `01extract.py`
+- `02get_sql_data01.py`
+- `03get_sql_data02.py`
+- `04neo4j11.py`
+- `02load_independent_table.sql`
+- `03load_dependent_table.sql`
 
 You will need to replace paths such as:
 
@@ -112,6 +121,8 @@ You will need to replace paths such as:
 
 with your own local absolute path to this repository.
 
+If you only want to restore the committed MySQL dump, you can skip those path edits entirely.
+
 For MySQL local file loading, you may also need:
 
 ```sql
@@ -120,79 +131,118 @@ SET GLOBAL local_infile = 1;
 
 and a client session started with `--local-infile=1`.
 
-## Fastest Path: Import The Committed CSV Outputs
+## Fastest Path: Restore The MySQL Dump
 
-If your goal is to get the database working quickly, you do **not** need to regenerate all CSV files. The repository already includes the staged outputs under [`luad_oncosg_2020/data/`](luad_oncosg_2020/data).
+If your goal is to get the database working quickly, use the committed dump:
+
+- [`luad_oncosg.sql`](luad_oncosg.sql)
+- [`sql/luad_oncosg.sql`](sql/luad_oncosg.sql)
+
+These two files are the same dump content. The repository-root copy is the recommended one to use when running the project directly.
 
 ### Exact Run Order
 
-1. Update all `LOAD DATA LOCAL INFILE` paths in [`sql/02load_independent_table.sql`](sql/02load_independent_table.sql) and [`sql/03load_dependent_table.sql`](sql/03load_dependent_table.sql).
+1. Create the target database `luad_oncosg`.
+2. Restore the dump into that database.
+3. Verify that the 14 tables were created and populated.
+4. Optionally run [`04neo4j11.py`](04neo4j11.py) to regenerate the Neo4j export folder from MySQL.
+
+Example restore:
+
+```bash
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS luad_oncosg;"
+mysql -u root -p luad_oncosg < /absolute/path/to/database_mutation/luad_oncosg.sql
+```
+
+Why the database is created first:
+
+- The dump includes `DROP TABLE`, `CREATE TABLE`, and `INSERT INTO` statements.
+- The dump does **not** include `CREATE DATABASE` or `USE luad_oncosg`.
+
+Quick verification:
+
+```sql
+USE luad_oncosg;
+SHOW TABLES;
+SELECT COUNT(*) FROM patient;
+SELECT COUNT(*) FROM sample;
+SELECT COUNT(*) FROM mutations;
+```
+
+## Alternative Path: Import The Committed CSV Outputs
+
+If you want to rebuild the relational database from the staged CSV files instead of the one-file dump, the repository already includes the generated outputs under [`luad_oncosg_2020/data/`](luad_oncosg_2020/data).
+
+### Exact Run Order
+
+1. Update all `LOAD DATA LOCAL INFILE` paths in [`02load_independent_table.sql`](02load_independent_table.sql) and [`03load_dependent_table.sql`](03load_dependent_table.sql).
 2. Create the target database `luad_oncosg`.
-3. Run [`sql/01create_table.sql`](sql/01create_table.sql).
-4. Run [`sql/02load_independent_table.sql`](sql/02load_independent_table.sql).
-5. Run [`sql/03load_dependent_table.sql`](sql/03load_dependent_table.sql).
-6. Optionally run [`scripts/04neo4j11.py`](scripts/04neo4j11.py) to regenerate the Neo4j export folder.
+3. Run [`01create_table.sql`](01create_table.sql).
+4. Run [`02load_independent_table.sql`](02load_independent_table.sql).
+5. Run [`03load_dependent_table.sql`](03load_dependent_table.sql).
+6. Optionally run [`04neo4j11.py`](04neo4j11.py) to regenerate the Neo4j export folder.
 
 Example MySQL session:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS luad_oncosg;
 USE luad_oncosg;
-SOURCE /absolute/path/to/database_mutation/sql/01create_table.sql;
-SOURCE /absolute/path/to/database_mutation/sql/02load_independent_table.sql;
-SOURCE /absolute/path/to/database_mutation/sql/03load_dependent_table.sql;
+SOURCE /absolute/path/to/database_mutation/01create_table.sql;
+SOURCE /absolute/path/to/database_mutation/02load_independent_table.sql;
+SOURCE /absolute/path/to/database_mutation/03load_dependent_table.sql;
 ```
 
 ## Full Rebuild From The Raw Study Files
 
-The project can also be rerun from the original text files, but the extraction logic is **stateful**: `scripts/01extract.py` depends on mappings that only exist after some tables have already been loaded into MySQL. Because of that, the clean rebuild is staged.
+The project can also be rerun from the original text files, but the extraction logic is **stateful**: `01extract.py` depends on mappings that only exist after some tables have already been loaded into MySQL. Because of that, the clean rebuild is staged.
 
 ### Exact Run Order
 
 1. Update the hard-coded paths and MySQL credentials in all relevant Python and SQL files.
 2. Create the database `luad_oncosg`.
-3. Run [`sql/01create_table.sql`](sql/01create_table.sql) to create the empty schema.
-4. Run `python scripts/01extract.py` once.
+3. Run [`01create_table.sql`](01create_table.sql) to create the empty schema.
+4. Run `python 01extract.py` once.
    This first pass generates the early CSV tables such as `01patient_table.csv` through `06consequence_table.csv`. If the script stops when it reaches the missing patient-mapping stage, that is expected for this rebuild path.
-5. Run [`sql/02load_independent_table.sql`](sql/02load_independent_table.sql) to load `patient`, `cancer_type`, `cancer_subtype`, `sample_type`, `gene`, and `consequence`.
-6. Run `python scripts/02get_sql_data01.py` to export [`luad_oncosg_2020/data/data_from_sql/01patient_mapping.csv`](luad_oncosg_2020/data/data_from_sql/01patient_mapping.csv).
-7. Run `python scripts/01extract.py` again.
+5. Run [`02load_independent_table.sql`](02load_independent_table.sql) to load `patient`, `cancer_type`, `cancer_subtype`, `sample_type`, `gene`, and `consequence`.
+6. Run `python 02get_sql_data01.py` to export [`luad_oncosg_2020/data/data_from_sql/01patient_mapping.csv`](luad_oncosg_2020/data/data_from_sql/01patient_mapping.csv).
+7. Run `python 01extract.py` again.
    This second pass can now generate `07admission_table.csv` and `08sample_table.csv` using the patient ID mapping. If it later stops because downstream sample IDs are not yet loaded into MySQL, continue with the next staged SQL load step.
-8. Execute only the `admission` and `sample` load sections from [`sql/03load_dependent_table.sql`](sql/03load_dependent_table.sql).
-9. Run `python scripts/01extract.py` a third time.
+8. Execute only the `admission` and `sample` load sections from [`03load_dependent_table.sql`](03load_dependent_table.sql).
+9. Run `python 01extract.py` a third time.
    This final staged pass can generate `09score_table.csv` through `14gene_sample_table.csv`, plus `gene_patch.csv`, because the necessary auto-generated IDs now exist in MySQL.
-10. Execute the remaining sections of [`sql/03load_dependent_table.sql`](sql/03load_dependent_table.sql) to load `score`, `treatment`, `mutations`, `sample_mutation`, `mutation_annotation`, `gene_patch`, and `gene_sample`.
-11. Optionally run `python scripts/04neo4j11.py` to export the graph-oriented CSVs into [`neo4j1/`](neo4j1).
+10. Execute the remaining sections of [`03load_dependent_table.sql`](03load_dependent_table.sql) to load `score`, `treatment`, `mutations`, `sample_mutation`, `mutation_annotation`, `gene_patch`, and `gene_sample`.
+11. Optionally run `python 04neo4j11.py` to export the graph-oriented CSVs into [`neo4j1/`](neo4j1).
 
-### About `scripts/03get_sql_data02.py`
+### About `03get_sql_data02.py`
 
-[`scripts/03get_sql_data02.py`](scripts/03get_sql_data02.py) exports a `case_id` mapping CSV, but the current version of `scripts/01extract.py` no longer depends on that file directly. It looks like a legacy helper from an earlier workflow, so treat it as optional unless you want the extra mapping artifact for debugging or documentation.
+[`03get_sql_data02.py`](03get_sql_data02.py) exports a `case_id` mapping CSV, but the current version of `01extract.py` no longer depends on that file directly. It looks like a legacy helper from an earlier workflow, so treat it as optional unless you want the extra mapping artifact for debugging or documentation.
 
 ## How To Import Or Use The SQL Dump
 
-This repository does **not** currently ship a single full `mysqldump` file. Instead, it uses:
+This repository now includes a full MySQL dump in both of these locations:
 
-- [`sql/01create_table.sql`](sql/01create_table.sql) for schema creation
-- [`sql/02load_independent_table.sql`](sql/02load_independent_table.sql) for independent tables
-- [`sql/03load_dependent_table.sql`](sql/03load_dependent_table.sql) for dependent tables
+- [`luad_oncosg.sql`](luad_oncosg.sql)
+- [`sql/luad_oncosg.sql`](sql/luad_oncosg.sql)
 
-If you want a reusable one-file dump **after** loading the database, you can create your own:
-
-```bash
-mysqldump -u root -p --databases luad_oncosg > luad_oncosg_dump.sql
-```
-
-and later restore it with:
+Recommended import command:
 
 ```bash
-mysql -u root -p < luad_oncosg_dump.sql
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS luad_oncosg;"
+mysql -u root -p luad_oncosg < /absolute/path/to/database_mutation/luad_oncosg.sql
 ```
+
+If you prefer the script-based route instead of the one-file restore, use:
+
+- [`01create_table.sql`](01create_table.sql) for schema creation
+- [`02load_independent_table.sql`](02load_independent_table.sql) for independent tables
+- [`03load_dependent_table.sql`](03load_dependent_table.sql) for dependent tables
 
 ## Schema, Documentation, And Presentation Assets
 
 - Schema / ER model: [`ERmodel`](ERmodel)
 - Data notes / documentation write-up: [`luad_oncosg_2020/log.md`](luad_oncosg_2020/log.md)
-- SQL schema and load scripts: [`sql/`](sql)
+- Recommended runnable SQL files: repository-root numbered `.sql` files
+- Organized mirror directory: [`sql/`](sql)
 - Presentation: **no slide deck or presentation file is currently committed in this repository**
 
 ## Expected End Result
@@ -252,7 +302,7 @@ SELECT COUNT(*) FROM gene_sample;
 
 ## Notes
 
-- The organized `scripts/` and `sql/` directories are the recommended entry points.
-- The numbered files at the repository root are identical copies kept for convenience.
+- The repository-root numbered `.py` and `.sql` files are the recommended entry points because some paths and folder assumptions follow the original project structure.
+- The organized `scripts/` and `sql/` directories are mainly kept for cleaner presentation and easier browsing.
 - Several scripts were clearly developed iteratively, so a staged rerun is expected when reproducing the pipeline from raw data.
 - The committed intermediate CSVs make the repository much easier to reuse than to fully rebuild from scratch.
