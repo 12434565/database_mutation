@@ -1,3 +1,3 @@
 git add *
-git commit -m ""
-git push -u origin master
+git commit -m "change readme"
+git push -u origin main

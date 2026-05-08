@@ -12,14 +12,15 @@
 
 This project transforms the **LUAD (OncoSG, 2020)** study files into a structured mutation database. It cleans clinical, sample, mutation, and expression data with Python, loads the curated results into a normalized MySQL schema with 14 related tables, and then exports graph-friendly CSV files for downstream Neo4j use. The repository already includes both the raw study inputs and the generated intermediate CSV tables, so you can either reproduce the pipeline step by step or take the faster route and import the committed outputs directly.
 
-## Topics Used
+## Tools Used
 
-| Topic | How it is used here |
+| Tool | How it is used here |
 | --- | --- |
 | Python | Data cleaning, reshaping, ID mapping, and export logic |
 | MySQL | Normalized target database for the final relational model |
 | SQL | Schema creation and staged `LOAD DATA LOCAL INFILE` import |
 | pandas | Parsing, merging, deduplication, and wide-to-long transforms |
+| [QuickDBD](https://app.quickdatabasediagrams.com/#/d/fbdRB0) | Used to create the ER model from query-style schema definitions |
 | Bioinformatics | Mutation, consequence, sample, and gene-expression integration |
 | Neo4j | Optional graph-oriented CSV export after MySQL load |
 
@@ -52,6 +53,7 @@ flowchart LR
 | [`luad_oncosg_2020/useless_files/`](luad_oncosg_2020/useless_files) | Original source files kept for reference but skipped in the main pipeline |
 | [`neo4j1/`](neo4j1) | Graph-oriented CSV exports and denormalized join outputs |
 | [`ERmodel`](ERmodel) | Plain-text entity relationship model for the relational design |
+| [QuickDBD ER model](https://app.quickdatabasediagrams.com/#/d/fbdRB0) | Online ER model built from query-style definitions for the same schema |
 | [`luad_oncosg_2020/log.md`](luad_oncosg_2020/log.md) | Working notes about the source file fields and study content |
 | Organized directory copies | Alternate copies arranged for readability; use the root numbered files when in doubt |
 
@@ -235,6 +237,7 @@ If you prefer the script-based route instead of the one-file restore, use:
 ## Schema, Documentation, And Presentation Assets
 
 - Schema / ER model: [`ERmodel`](ERmodel)
+- QuickDBD ER model: [app.quickdatabasediagrams.com/#/d/fbdRB0](https://app.quickdatabasediagrams.com/#/d/fbdRB0), used to create the ER model from query-style schema definitions.
 - Data notes / documentation write-up: [`luad_oncosg_2020/log.md`](luad_oncosg_2020/log.md)
 - Recommended runnable SQL files: repository-root numbered `.sql` files
 - Organized mirror directory: [`sql/`](sql)
