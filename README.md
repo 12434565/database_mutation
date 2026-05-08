@@ -38,13 +38,23 @@ flowchart LR
     H --> I["neo4j1/<br/>patient, sample, mutation, join tables"]
 ```
 
+## Visual Diagrams
+
+These image assets are now committed in the repository and give a quick visual reference for both the relational schema and the Neo4j-oriented structure.
+
+![ER Diagram](diagram/ER.png)
+
+![Neo4j Diagram](diagram/neo4j.png)
+
 ## Repository Layout
 
 | Path | Purpose |
 | --- | --- |
 | Root numbered `.py` and `.sql` files | Recommended entry points for running the project because their paths match the original file structure used during development |
-| [`scripts/`](scripts) | Organized copies of the main Python scripts, kept mainly for cleaner browsing and presentation |
+| [`scripts/`](scripts) | Organized copies of the main Python scripts plus a small helper shell script, kept mainly for cleaner browsing and presentation |
 | [`sql/`](sql) | Organized mirror copies of the SQL files, kept mainly for cleaner browsing and presentation |
+| [`diagram/`](diagram) | Visual PNG exports for the ER model and Neo4j structure |
+| [`scripts/a.sh`](scripts/a.sh) | Small Git helper script for add/commit/push, not part of the database pipeline itself |
 | [`luad_oncosg.sql`](luad_oncosg.sql) | Full MySQL dump and recommended one-file restore target from the repository root |
 | [`sql/luad_oncosg.sql`](sql/luad_oncosg.sql) | Duplicate copy of the same dump inside the organized `sql/` directory |
 | [`luad_oncosg_2020/`](luad_oncosg_2020) | Source study files, generated staging CSVs, notes, and reference metadata |
@@ -237,6 +247,8 @@ If you prefer the script-based route instead of the one-file restore, use:
 ## Schema, Documentation, And Presentation Assets
 
 - Schema / ER model: [`ERmodel`](ERmodel)
+- ER diagram image: [`diagram/ER.png`](diagram/ER.png)
+- Neo4j diagram image: [`diagram/neo4j.png`](diagram/neo4j.png)
 - QuickDBD ER model: [app.quickdatabasediagrams.com/#/d/fbdRB0](https://app.quickdatabasediagrams.com/#/d/fbdRB0), used to create the ER model from query-style schema definitions.
 - Data notes / documentation write-up: [`luad_oncosg_2020/log.md`](luad_oncosg_2020/log.md)
 - Recommended runnable SQL files: repository-root numbered `.sql` files
