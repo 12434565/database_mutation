@@ -1,0 +1,13 @@
+ONCOTREE_CODE,SUBTYPE_MAIN,SUBTYPE_DETAIL,ICD_CODE
+LUAD,Adenocarcinoma,NOS,81403
+LUAD,Adenocarcinoma,NSCLC,
+LUAD,Invasive mucinous adenocarcinoma,,
+LUAD,Acinar adenocarcinoma,,85513
+LUAD,Lepidic adenocarcinoma,,82503
+LUAD,Papillary adenocarcinoma,,82603
+LUAD,Solid adenocarcinoma,,82303
+LUAD,Acinar adenocarcinoma,,
+LUAD,Adenocarcinoma,mixed subtypes,
+LUAD,Invasive mucinous adenocarcinoma,,82533
+LUAD,Micropapillary adenocarcinoma,,82653
+LUAD,Minimally invasive adenocarcinoma,non-mucinous,82502

@@ -1,0 +1,306 @@
+Sample_Id_original,case_id,PURITY,SAMPLE_TYPE_ID,SOMATIC_STATUS,TMB_NONSYNONYMOUS,ONCOTREE_CODE,HISTOLOGICAL_GRADE,EXOME_SEQ,RNA_SEQ_ANALYSIS,SEQUENCING_TYPE,Tumor_Sample_Barcode
+BGI-EX01,1,0.24,Primary,Matched,2.9,LUAD,,Paired,,WES,BGI-EX01
+BGI-EX02,2,0.17,Primary,Matched,1.466667,LUAD,,Paired,,WES,BGI-EX02
+BGI-EX03,3,0.14,Primary,Matched,18.233333,LUAD,,Paired,,WES,BGI-EX03
+BGI-EX04,4,0.3,Primary,Matched,1.166667,LUAD,,Paired,,WES,BGI-EX04
+BGI-EX05,5,0.13,Primary,Matched,1.6,LUAD,,Paired,,WES,BGI-EX05
+BGI-EX06,6,0.58,Primary,Matched,8.6,LUAD,,Paired,,WES,BGI-EX06
+BGI-EX07,7,0.16,Primary,Matched,7.066667,LUAD,,Paired,,WES,BGI-EX07
+BGI-EX08,8,0.23,Primary,Matched,1.6,LUAD,,Paired,,WES,BGI-EX08
+BGI-EX09,9,0.3,Primary,Matched,11.433333,LUAD,,Paired,,WES,BGI-EX09
+BGI-RS01,10,0.16,Primary,Matched,0.966667,LUAD,,Paired,,WES,BGI-RS01
+BGI-RS02,11,0.22,Primary,Matched,1.1,LUAD,,Paired,,WES,BGI-RS02
+BGI-RS03,12,0.17,Primary,Matched,10.766667,LUAD,,Paired,,WES,BGI-RS03
+BGI-RS04,13,0.25,Primary,Matched,0.566667,LUAD,,Paired,,WES,BGI-RS04
+BGI-RS05,14,0.16,Primary,Matched,7.266667,LUAD,,Paired,,WES,BGI-RS05
+BGI-RS06,15,0.16,Primary,Matched,8.033333,LUAD,,Paired,,WES,BGI-RS06
+BGI-RS07,16,0.18,Primary,Matched,6.0,LUAD,,Paired,,WES,BGI-RS07
+BGI-RS08,17,0.14,Primary,Matched,5.633333,LUAD,,Paired,,WES,BGI-RS08
+BGI-RS09,18,0.12,Primary,Matched,0.9,LUAD,,Paired,,WES,BGI-RS09
+BGI-RS10,19,0.18,Primary,Matched,14.4,LUAD,,Paired,,WES,BGI-RS10
+BGI-RS11,20,0.16,Primary,Matched,8.133333,LUAD,,Paired,,WES,BGI-RS11
+BGI-RS12,21,0.19,Primary,Matched,0.8,LUAD,,Paired,,WES,BGI-RS12
+BGI-RS13,22,0.18,Primary,Matched,5.633333,LUAD,,Paired,,WES,BGI-RS13
+BGI-RS14,23,0.31,Primary,Matched,10.933333,LUAD,,Paired,,WES,BGI-RS14
+BGI-RS15,24,0.16,Primary,Matched,3.133333,LUAD,,Paired,,WES,BGI-RS15
+BGI-RS16,25,0.26,Primary,Matched,1.466667,LUAD,,Paired,,WES,BGI-RS16
+BGI-RS17,26,0.16,Primary,Matched,1.233333,LUAD,,Paired,,WES,BGI-RS17
+BGI-RS18,27,0.17,Primary,Matched,3.2,LUAD,,Paired,,WES,BGI-RS18
+BGI-RS19,28,0.15,Primary,Matched,1.0,LUAD,,Paired,,WES,BGI-RS19
+BGI-RS20,29,0.62,Primary,Matched,2.466667,LUAD,,Paired,,WES,BGI-RS20
+BGI-RS21,30,0.21,Primary,Matched,1.3,LUAD,,Paired,,WES,BGI-RS21
+BGI-RS22,31,0.14,Primary,Matched,1.266667,LUAD,,Paired,,WES,BGI-RS22
+BGI-RS23,32,0.28,Primary,Matched,1.433333,LUAD,,Paired,,WES,BGI-RS23
+BGI-RS24,33,0.48,Primary,Matched,2.2,LUAD,,Paired,,WES,BGI-RS24
+BGI-RS25,34,0.25,Primary,Matched,1.6,LUAD,,Paired,,WES,BGI-RS25
+BGI-RS26,35,0.18,Primary,Matched,7.533333,LUAD,,Paired,,WES,BGI-RS26
+BGI-RS27,36,0.59,Primary,Matched,7.733333,LUAD,,Paired,,WES,BGI-RS27
+BGI-RS28,37,0.26,Primary,Matched,4.533333,LUAD,,Paired,,WES,BGI-RS28
+BGI-RS29,38,0.19,Primary,Matched,0.6,LUAD,,Paired,,WES,BGI-RS29
+BGI-RS30,39,0.26,Primary,Matched,2.4,LUAD,,Paired,,WES,BGI-RS30
+BGI-RS31,40,0.22,Primary,Matched,2.733333,LUAD,,Paired,,WES,BGI-RS31
+BGI-RS32,41,0.22,Primary,Matched,1.4,LUAD,,Paired,,WES,BGI-RS32
+BGI-RS33,42,0.28,Primary,Matched,5.9,LUAD,,Paired,,WES,BGI-RS33
+BGI-RS34,43,0.18,Primary,Matched,5.0,LUAD,,Paired,,WES,BGI-RS34
+BGI-RS35,44,0.33,Primary,Matched,2.4,LUAD,,Paired,,WES,BGI-RS35
+BGI-RS36,45,0.18,Primary,Matched,5.233333,LUAD,,Paired,,WES,BGI-RS36
+BGI-RS37,46,0.13,Primary,Matched,0.633333,LUAD,,Paired,,WES,BGI-RS37
+BGI-RS38,47,0.57,Primary,Matched,1.033333,LUAD,,Paired,,WES,BGI-RS38
+BGI-RS39,48,0.55,Primary,Matched,1.233333,LUAD,,Paired,,WES,BGI-RS39
+BGI-RS40,49,0.6,Primary,Matched,10.4,LUAD,,Paired,,WES,BGI-RS40
+BGI-RS41,50,0.14,Primary,Matched,0.7,LUAD,,Paired,,WES,BGI-RS41
+BGI-RS42,51,0.2,Primary,Matched,0.833333,LUAD,,Paired,,WES,BGI-RS42
+BGI-RS44,52,0.2,Primary,Matched,0.6,LUAD,,Paired,,WES,BGI-RS44
+BGI-RS45,53,0.2,Primary,Matched,1.6,LUAD,,Paired,,WES,BGI-RS45
+BGI-RS46,54,0.2,Primary,Matched,0.866667,LUAD,,Paired,,WES,BGI-RS46
+BGI-RS47,55,0.2,Primary,Matched,0.633333,LUAD,,Paired,,WES,BGI-RS47
+BGI-RS48,56,0.24,Primary,Matched,2.733333,LUAD,,Paired,,WES,BGI-RS48
+BGI-RS49,57,0.18,Primary,Matched,4.933333,LUAD,,Paired,,WES,BGI-RS49
+BGI-RS50,58,0.58,Primary,Matched,4.833333,LUAD,,Paired,,WES,BGI-RS50
+BGI-RS51,59,0.39,Primary,Matched,0.8,LUAD,,Paired,,WES,BGI-RS51
+BGI-RS52,60,0.12,Primary,Matched,0.933333,LUAD,,Paired,,WES,BGI-RS52
+BGI-RS53,61,0.16,Primary,Matched,1.033333,LUAD,,Paired,,WES,BGI-RS53
+BGI-RS54,62,0.23,Primary,Matched,2.133333,LUAD,,Paired,,WES,BGI-RS54
+BGI-RS55,63,0.32,Primary,Matched,3.566667,LUAD,,Paired,,WES,BGI-RS55
+BGI-RS56,64,0.16,Primary,Matched,9.666667,LUAD,,Paired,,WES,BGI-RS56
+BGI-RS57,65,0.38,Primary,Matched,18.3,LUAD,,Paired,,WES,BGI-RS57
+BGI-RS58,66,0.15,Primary,Matched,2.5,LUAD,,Paired,,WES,BGI-RS58
+BGI-RS59,67,0.29,Primary,Matched,6.866667,LUAD,,Paired,,WES,BGI-RS59
+BGI-RS60,68,0.25,Primary,Matched,31.5,LUAD,,Paired,,WES,BGI-RS60
+BGI-WG01,69,0.28,Primary,Matched,7.766667,LUAD,,Paired,,WES,BGI-WG01
+BGI-WG02,70,0.14,Primary,Matched,3.433333,LUAD,,Paired,,WES,BGI-WG02
+BGI-WG03,71,0.43,Primary,Matched,1.633333,LUAD,,Paired,,WES,BGI-WG03
+BGI-WG04,72,0.54,Primary,Matched,1.066667,LUAD,,Paired,,WES,BGI-WG04
+BGI-WG05,73,0.31,Primary,Matched,2.133333,LUAD,,Paired,,WES,BGI-WG05
+BGI-WG06,74,0.34,Primary,Matched,1.266667,LUAD,,Paired,,WES,BGI-WG06
+BGI-WG07,75,0.13,Primary,Matched,1.033333,LUAD,,Paired,,WES,BGI-WG07
+BGI-WG08,76,0.19,Primary,Matched,24.033333,LUAD,,Paired,,WES,BGI-WG08
+BGI-WG09,77,0.14,Primary,Matched,0.633333,LUAD,,Paired,,WES,BGI-WG09
+BGI-WG10,78,0.29,Primary,Matched,16.6,LUAD,,Paired,,WES,BGI-WG10
+BGI-WG11,79,0.2,Primary,Matched,1.566667,LUAD,,Paired,,WES,BGI-WG11
+BGI-WG12,80,0.17,Primary,Matched,1.3,LUAD,,Paired,,WES,BGI-WG12
+BGI-WG13,81,0.18,Primary,Matched,1.3,LUAD,,Paired,,WES,BGI-WG13
+BGI-WG14,82,0.24,Primary,Matched,2.433333,LUAD,,Paired,,WES,BGI-WG14
+BGI-WG15,83,0.18,Primary,Matched,4.333333,LUAD,,Paired,,WES,BGI-WG15
+BGI-WG16,84,0.23,Primary,Matched,1.533333,LUAD,,Paired,,WES,BGI-WG16
+BGI-WG17,85,0.41,Primary,Matched,2.233333,LUAD,,Paired,,WES,BGI-WG17
+BGI-WG18,86,0.4,Primary,Matched,3.133333,LUAD,,Paired,,WES,BGI-WG18
+BGI-WG19,87,0.16,Primary,Matched,0.6,LUAD,,Paired,,WES,BGI-WG19
+BGI-WG20,88,0.37,Primary,Matched,3.666667,LUAD,,Paired,,WES,BGI-WG20
+BGI-WG21,89,0.15,Primary,Matched,0.933333,LUAD,,Paired,,WES,BGI-WG21
+BGI-WG22,90,0.23,Primary,Matched,0.966667,LUAD,,Paired,,WES,BGI-WG22
+BGI-WG23,91,0.43,Primary,Matched,3.266667,LUAD,,Paired,,WES,BGI-WG23
+BGI-WG24,92,0.63,Primary,Matched,3.333333,LUAD,,Paired,,WES,BGI-WG24
+A183,93,0.38,Primary,Matched,18.933333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A183
+A184,94,,Primary,Matched,,LUAD,Poorly differentiated,No,Tumor,RNA-Seq,A184
+A185,95,0.34,Primary,Matched,2.333333,LUAD,,Paired,Tumor,WES + RNA-Seq,A185
+A186,96,0.34,Primary,Matched,3.966667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A186
+A187,97,0.22,Primary,Matched,1.133333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A187
+A188,98,0.28,Primary,Matched,1.066667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A188
+A190,99,0.51,Primary,Matched,1.066667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A190
+A191,100,0.62,Primary,Matched,1.333333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A191
+A192,101,0.2,Primary,Matched,2.766667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A192
+A193,102,0.17,Primary,Matched,7.833333,LUAD,Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A193
+A194,103,0.15,Primary,Matched,0.6,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A194
+A195,104,0.29,Primary,Matched,0.6,LUAD,,Paired,Tumor,WES + RNA-Seq,A195
+A196,105,0.29,Primary,Matched,1.6,LUAD,Well to Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A196
+A197,106,0.6,Primary,Matched,3.866667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A197
+A198,107,0.47,Primary,Matched,2.6,LUAD,,Paired,Tumor,WES + RNA-Seq,A198
+A199,108,0.15,Primary,Matched,12.7,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A199
+A200,109,0.63,Primary,Matched,2.633333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A200
+A201,110,0.37,Primary,Matched,5.466667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A201
+A202,111,0.74,Primary,Matched,2.133333,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A202
+A203,112,0.23,Primary,Matched,1.566667,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A203
+A204,113,0.78,Primary,Matched,2.233333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A204
+A205,114,0.17,Primary,Matched,1.3,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A205
+A206,115,0.22,Primary,Matched,1.733333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A206
+A207,116,0.27,Primary,Matched,2.433333,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A207
+A208,117,0.25,Primary,Matched,4.566667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A208
+A209,118,0.24,Primary,Matched,0.5,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A209
+A210,119,0.32,Primary,Matched,18.4,LUAD,Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A210
+A211,120,0.23,Primary,Matched,0.5,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A211
+A212,121,0.15,Primary,Matched,0.433333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A212
+A213,122,0.22,Primary,Matched,1.5,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A213
+A214,123,0.33,Primary,Matched,0.133333,LUAD,Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A214
+A215,124,0.28,Primary,Matched,0.2,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A215
+A216,125,0.37,Primary,Matched,17.4,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A216
+A217,126,0.36,Primary,Matched,1.966667,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A217
+A218,127,0.2,Primary,Matched,7.066667,LUAD,Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A218
+A219,128,0.41,Primary,Matched,2.7,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A219
+A220,129,0.33,Primary,Matched,8.166667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A220
+A221,130,0.3,Primary,Matched,0.1,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A221
+A222,131,0.34,Primary,Matched,2.1,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A222
+A224,132,0.25,Primary,Matched,0.133333,LUAD,,Paired,No,WES,A224
+A227,133,0.26,Primary,Matched,3.933333,LUAD,,Paired,No,WES,A227
+A228,134,0.57,Primary,Matched,20.1,LUAD,,Paired,No,WES,A228
+A229,135,0.78,Primary,Matched,6.6,LUAD,,Paired,No,WES,A229
+A230,136,0.76,Primary,Matched,14.3,LUAD,Moderately differentiated,Paired,No,WES,A230
+A231,137,0.37,Primary,Matched,23.133333,LUAD,,Paired,No,WES,A231
+A232,138,0.81,Primary,Matched,3.0,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A232
+A247,139,0.14,Primary,Matched,6.7,LUAD,Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A247
+A241,140,0.31,Primary,Matched,3.1,LUAD,Moderately to Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A241
+A234,141,0.29,Primary,Matched,0.5,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A234
+A233,142,0.16,Primary,Matched,1.066667,LUAD,Well to Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A233
+A177,143,0.3,Primary,Matched,2.5,LUAD,Poorly differentiated,Paired,Paired,WES + RNA-Seq,A177
+A167,144,0.24,Primary,Matched,2.433333,LUAD,Moderately differentiated,Paired,No,WES,A167
+A159,145,0.3,Primary,Matched,1.866667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A159
+A158,146,0.49,Primary,Matched,2.466667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A158
+A155,147,0.38,Primary,Matched,1.533333,LUAD,Moderately differentiated,Paired,No,WES,A155
+A153,148,0.43,Primary,Matched,1.266667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A153
+A144,149,0.72,Primary,Matched,1.7,LUAD,Poorly differentiated,Paired,Paired,WES + RNA-Seq,A144
+A143,150,0.24,Primary,Matched,9.733333,LUAD,Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A143
+A139,151,0.28,Primary,Matched,1.766667,LUAD,Moderately differentiated,Paired,Normal,WES + RNA-Seq,A139
+A138,152,0.24,Primary,Matched,0.033333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A138
+A131,153,0.8,Primary,Matched,17.866667,LUAD,,Paired,Tumor,WES + RNA-Seq,A131
+A120,154,0.28,Primary,Matched,2.833333,LUAD,,Paired,Tumor,WES + RNA-Seq,A120
+A006,155,0.1,Primary,Matched,0.066667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A006
+A073,156,0.52,Primary,Matched,1.966667,LUAD,Moderately differentiated,Paired,No,WES,A073
+A025,157,0.38,Primary,Matched,1.3,LUAD,,Paired,No,WES,A025
+A016,158,0.16,Primary,Matched,21.8,LUAD,Poorly differentiated,Paired,No,WES,A016
+A012,159,0.38,Primary,Matched,12.466667,LUAD,Moderately to Poorly differentiated,Paired,No,WES,A012
+A008,160,0.34,Primary,Matched,1.066667,LUAD,Moderately differentiated,Paired,Normal,WES + RNA-Seq,A008
+A258,161,0.2,Primary,Matched,2.333333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A258
+A259,162,0.33,Primary,Matched,1.133333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A259
+A260,163,0.5,Primary,Matched,4.566667,LUAD,,Paired,Paired,WES + RNA-Seq,A260
+A261,164,0.35,Primary,Matched,2.5,LUAD,,Paired,Paired,WES + RNA-Seq,A261
+A262,165,0.86,Primary,Matched,3.1,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A262
+A263,166,0.72,Primary,Matched,1.8,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A263
+A264,167,0.26,Primary,Matched,0.233333,LUAD,Poorly differentiated,Paired,Paired,WES + RNA-Seq,A264
+A265,168,0.18,Primary,Matched,2.433333,LUAD,,Paired,Paired,WES + RNA-Seq,A265
+A266,169,0.19,Primary,Matched,4.533333,LUAD,Poorly differentiated,Paired,Paired,WES + RNA-Seq,A266
+A267,170,0.12,Primary,Matched,6.8,LUAD,,Paired,Paired,WES + RNA-Seq,A267
+A268,171,0.26,Primary,Matched,0.5,LUAD,Well to Moderately differentiated,Paired,Paired,WES + RNA-Seq,A268
+A269,172,0.46,Primary,Matched,1.866667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A269
+A270,173,0.13,Primary,Matched,1.0,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A270
+A271,174,0.17,Primary,Matched,14.766667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A271
+A272,175,0.46,Primary,Matched,1.6,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A272
+A273,176,0.28,Primary,Matched,4.733333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A273
+A274,177,0.26,Primary,Matched,1.666667,LUAD,Well differentiated,Paired,Paired,WES + RNA-Seq,A274
+A275,178,0.17,Primary,Matched,2.033333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A275
+A276,179,0.19,Primary,Matched,2.766667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A276
+A277,180,0.83,Primary,Matched,1.733333,LUAD,,Paired,Paired,WES + RNA-Seq,A277
+A278,181,0.34,Primary,Matched,1.566667,LUAD,,Paired,Paired,WES + RNA-Seq,A278
+A279,182,0.17,Primary,Matched,2.066667,LUAD,,Paired,Paired,WES + RNA-Seq,A279
+A280,183,0.5,Primary,Matched,0.666667,LUAD,,Paired,Paired,WES + RNA-Seq,A280
+A281,184,0.21,Primary,Matched,1.933333,LUAD,,Paired,Paired,WES + RNA-Seq,A281
+A282,185,0.6,Primary,Matched,1.7,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A282
+A283,186,0.17,Primary,Matched,0.866667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A283
+A284,187,0.33,Primary,Matched,2.2,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A284
+A285,188,0.31,Primary,Matched,2.733333,LUAD,,Paired,Paired,WES + RNA-Seq,A285
+A344,189,0.3,Primary,Matched,0.133333,LUAD,,Paired,No,WES,A344
+A349,190,0.39,Primary,Matched,4.633333,LUAD,,Paired,No,WES,A349
+A364,191,0.66,Primary,Matched,3.166667,LUAD,Moderately differentiated,Paired,No,WES,A364
+A368,192,0.17,Primary,Matched,0.933333,LUAD,,Paired,No,WES,A368
+A017,193,0.25,Primary,Matched,2.466667,LUAD,,Paired,No,WES,A017
+A028,194,0.36,Primary,Matched,2.666667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A028
+A021,195,0.42,Primary,Matched,2.133333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A021
+A033,196,0.26,Primary,Matched,0.733333,LUAD,Poorly differentiated,Paired,Paired,WES + RNA-Seq,A033
+A027,197,0.27,Primary,Matched,0.666667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A027
+A068,198,0.14,Primary,Matched,1.633333,LUAD,Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A068
+A101,199,0.43,Primary,Matched,2.2,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A101
+A071,200,0.35,Primary,Matched,2.0,LUAD,,Paired,No,WES,A071
+A072,201,0.19,Primary,Matched,0.966667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A072
+A074,202,0.18,Primary,Matched,2.1,LUAD,Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A074
+A100,203,0.2,Primary,Matched,1.5,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A100
+A102,204,0.31,Primary,Matched,4.766667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A102
+A103,205,0.16,Primary,Matched,2.233333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A103
+A104,206,0.32,Primary,Matched,0.833333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A104
+A109,207,0.23,Primary,Matched,24.166667,LUAD,Moderately to Poorly differentiated,Paired,No,WES,A109
+A117,208,0.49,Primary,Matched,1.266667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A117
+A122,209,0.15,Primary,Matched,1.033333,LUAD,Moderately differentiated,Paired,Normal,WES + RNA-Seq,A122
+A134,210,0.71,Primary,Matched,1.166667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A134
+A136,211,0.44,Primary,Matched,2.366667,LUAD,,Paired,Normal,WES + RNA-Seq,A136
+A147,212,0.45,Primary,Matched,0.333333,LUAD,Moderately differentiated,Paired,Normal,WES + RNA-Seq,A147
+A146,213,0.39,Primary,Matched,2.4,LUAD,Moderately differentiated,Paired,No,WES,A146
+A148,214,0.24,Primary,Matched,2.2,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A148
+A149,215,0.21,Primary,Matched,1.166667,LUAD,Well differentiated,Paired,No,WES,A149
+A150,216,0.45,Primary,Matched,5.033333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A150
+A156,217,0.31,Primary,Matched,1.666667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A156
+A165,218,0.16,Primary,Matched,0.9,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A165
+A157,219,0.25,Primary,Matched,1.933333,LUAD,Moderately to Poorly differentiated,Paired,Paired,WES + RNA-Seq,A157
+A162,220,0.32,Primary,Matched,1.566667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A162
+A163,221,0.37,Primary,Matched,0.933333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A163
+A243,222,0.37,Primary,Matched,1.066667,LUAD,Poorly differentiated,Paired,Paired,WES + RNA-Seq,A243
+A182,223,0.35,Primary,Matched,3.866667,LUAD,Poorly differentiated,Paired,Paired,WES + RNA-Seq,A182
+A255,224,0.31,Primary,Matched,0.866667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A255
+A169,225,0.54,Primary,Matched,2.6,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A169
+A252,226,0.27,Primary,Matched,0.333333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A252
+A239,227,0.14,Primary,Matched,1.333333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A239
+A250,228,0.17,Primary,Matched,4.066667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A250
+A240,229,0.29,Primary,Matched,2.4,LUAD,Poorly differentiated,Paired,Paired,WES + RNA-Seq,A240
+A249,230,0.19,Primary,Matched,1.6,LUAD,,Paired,Tumor,WES + RNA-Seq,A249
+A322,231,0.6,Primary,Matched,1.2,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A322
+A306,232,0.18,Primary,Matched,35.1,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A306
+A302,233,0.23,Primary,Matched,1.966667,LUAD,Moderately differentiated,Paired,Normal,WES + RNA-Seq,A302
+A323,234,0.27,Primary,Matched,1.833333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A323
+A307,235,0.4,Primary,Matched,1.8,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A307
+A380,236,0.12,Primary,Matched,1.133333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A380
+A315,237,0.2,Primary,Matched,0.9,LUAD,Well to Moderately differentiated,Paired,Paired,WES + RNA-Seq,A315
+A377,238,0.16,Primary,Matched,1.766667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A377
+A375,239,0.38,Primary,Matched,2.3,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A375
+A425,240,0.18,Primary,Matched,1.933333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A425
+A316,241,0.28,Primary,Matched,1.566667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A316
+A379,242,0.21,Primary,Matched,1.0,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A379
+A483,243,0.21,Primary,Matched,1.166667,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A483
+A484,244,,Primary,Matched,,LUAD,Moderately differentiated,No,Tumor,RNA-Seq,A484
+A485,245,0.73,Primary,Matched,1.966667,LUAD,Well differentiated,Paired,No,WES,A485
+A486,246,0.13,Primary,Matched,0.866667,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A486
+A488,247,0.2,Primary,Matched,2.533333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A488
+A489,248,,Primary,Matched,,LUAD,Moderately differentiated,No,Tumor,RNA-Seq,A489
+A490,249,0.4,Primary,Matched,2.733333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A490
+A492,250,0.21,Primary,Matched,1.6,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A492
+A493,251,0.24,Primary,Matched,1.566667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A493
+A494,252,0.68,Primary,Matched,2.166667,LUAD,Well differentiated,Paired,No,WES,A494
+A495,253,0.44,Primary,Matched,2.433333,LUAD,Moderately differentiated,Paired,No,WES,A495
+A496,254,0.13,Primary,Matched,0.2,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A496
+A497,255,0.24,Primary,Matched,2.333333,LUAD,Moderately differentiated,Paired,No,WES,A497
+A499,256,0.12,Primary,Matched,0.5,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A499
+A500,257,0.3,Primary,Matched,0.066667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A500
+A501,258,0.21,Primary,Matched,0.033333,LUAD,Poorly differentiated,Paired,No,WES,A501
+A502,259,0.4,Primary,Matched,2.3,LUAD,,Paired,No,WES,A502
+A503,260,0.44,Primary,Matched,1.566667,LUAD,Moderately to Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A503
+A504,261,0.36,Primary,Matched,3.666667,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A504
+A505,262,0.36,Primary,Matched,4.666667,LUAD,Moderately differentiated,Paired,No,WES,A505
+A295,263,0.59,Primary,Matched,1.2,LUAD,Moderately differentiated,Paired,No,WES,A295
+A152,264,0.26,Primary,Matched,5.7,LUAD,Poorly differentiated,Paired,No,WES,A152
+A015,265,0.51,Primary,Matched,2.4,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A015
+A062,266,0.48,Primary,Matched,4.066667,LUAD,Moderately to Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A062
+A037,267,0.31,Primary,Matched,1.866667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A037
+A066,268,0.5,Primary,Matched,2.933333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A066
+A310,269,0.56,Primary,Matched,1.833333,LUAD,Well differentiated,Paired,Tumor,WES + RNA-Seq,A310
+A320,270,0.3,Primary,Matched,0.766667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A320
+A426,271,0.57,Primary,Matched,1.266667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A426
+A381,272,0.67,Primary,Matched,1.6,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A381
+A428,273,0.67,Primary,Matched,1.3,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A428
+A430,274,0.24,Primary,Matched,0.966667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A430
+A432,275,0.28,Primary,Matched,1.166667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A432
+A434,276,0.26,Primary,Matched,1.566667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A434
+A435,277,0.2,Primary,Matched,1.866667,LUAD,Moderately differentiated,Paired,Normal,WES + RNA-Seq,A435
+A507,278,0.26,Primary,Matched,0.066667,LUAD,Well to Moderately differentiated,Paired,Normal,WES + RNA-Seq,A507
+A508,279,0.3,Primary,Matched,0.233333,LUAD,Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A508
+A509,280,0.34,Primary,Matched,8.3,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A509
+A063,281,0.78,Primary,Matched,1.433333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A063
+A130,282,0.46,Primary,Matched,2.3,LUAD,Moderately differentiated,Paired,No,WES,A130
+A168,283,0.46,Primary,Matched,1.766667,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A168
+A433,284,0.24,Primary,Matched,4.833333,LUAD,Poorly differentiated,Paired,Tumor,WES + RNA-Seq,A433
+A513,285,0.24,Primary,Matched,1.266667,LUAD,,Paired,No,WES,A513
+A112,286,0.64,Primary,Matched,0.8,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A112
+A114,287,0.17,Primary,Matched,1.566667,LUAD,Moderately differentiated,Paired,Normal,WES + RNA-Seq,A114
+A111,288,0.76,Primary,Matched,1.833333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A111
+A110,289,0.48,Primary,Matched,35.133333,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A110
+A124,290,0.29,Primary,Matched,0.4,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A124
+A126,291,0.16,Primary,Matched,4.233333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A126
+A511,292,0.17,Primary,Matched,1.433333,LUAD,Poorly differentiated,Paired,Paired,WES + RNA-Seq,A511
+A512,293,0.73,Primary,Matched,0.666667,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A512
+A514,294,0.12,Primary,Matched,0.5,LUAD,Moderately differentiated,Paired,Tumor,WES + RNA-Seq,A514
+A517,295,0.16,Primary,Matched,1.6,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A517
+A510,296,0.28,Primary,Matched,3.6,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A510
+A524,297,0.14,Primary,Matched,0.833333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A524
+A522,298,0.26,Primary,Matched,0.433333,LUAD,,Paired,Paired,WES + RNA-Seq,A522
+A521,299,0.18,Primary,Matched,1.733333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A521
+A519,300,0.37,Primary,Matched,2.7,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A519
+A534,301,0.84,Primary,Matched,1.5,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A534
+A530,302,0.24,Primary,Matched,1.9,LUAD,,Paired,Paired,WES + RNA-Seq,A530
+A532,303,0.18,Primary,Matched,24.233333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A532
+A538,304,0.12,Primary,Matched,1.033333,LUAD,Moderately differentiated,Paired,Paired,WES + RNA-Seq,A538
+A537,305,0.42,Primary,Matched,3.066667,LUAD,Poorly differentiated,Paired,Paired,WES + RNA-Seq,A537
