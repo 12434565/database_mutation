@@ -42,7 +42,7 @@ flowchart LR
 | Path | Purpose |
 | --- | --- |
 | Root numbered `.py` and `.sql` files | Recommended entry points for running the project because their paths match the original file structure used during development |
-| [`scripts/`](scripts) | Organized mirror copies of the Python scripts, kept mainly for cleaner browsing and presentation |
+| [`scripts/`](scripts) | Organized copies of the main Python scripts, kept mainly for cleaner browsing and presentation |
 | [`sql/`](sql) | Organized mirror copies of the SQL files, kept mainly for cleaner browsing and presentation |
 | [`luad_oncosg.sql`](luad_oncosg.sql) | Full MySQL dump and recommended one-file restore target from the repository root |
 | [`sql/luad_oncosg.sql`](sql/luad_oncosg.sql) | Duplicate copy of the same dump inside the organized `sql/` directory |
@@ -108,7 +108,6 @@ This repository contains **hard-coded local paths** and **placeholder database c
 
 - `01extract.py`
 - `02get_sql_data01.py`
-- `03get_sql_data02.py`
 - `04neo4j11.py`
 - `02load_independent_table.sql`
 - `03load_dependent_table.sql`
@@ -212,10 +211,6 @@ The project can also be rerun from the original text files, but the extraction l
    This final staged pass can generate `09score_table.csv` through `14gene_sample_table.csv`, plus `gene_patch.csv`, because the necessary auto-generated IDs now exist in MySQL.
 10. Execute the remaining sections of [`03load_dependent_table.sql`](03load_dependent_table.sql) to load `score`, `treatment`, `mutations`, `sample_mutation`, `mutation_annotation`, `gene_patch`, and `gene_sample`.
 11. Optionally run `python 04neo4j11.py` to export the graph-oriented CSVs into [`neo4j1/`](neo4j1).
-
-### About `03get_sql_data02.py`
-
-[`03get_sql_data02.py`](03get_sql_data02.py) exports a `case_id` mapping CSV, but the current version of `01extract.py` no longer depends on that file directly. It looks like a legacy helper from an earlier workflow, so treat it as optional unless you want the extra mapping artifact for debugging or documentation.
 
 ## How To Import Or Use The SQL Dump
 
