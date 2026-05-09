@@ -55,14 +55,14 @@ IMSIG_TRANSLATION DECIMAL(10,6)
 
 cancer_type
 -
-ONCOTREE_CODE varchar(100) FK -< cancer_subtype.ONCOTREE_CODE
+ONCOTREE_CODE varchar(100)
 CANCER_TYPE varchar(100)
 CANCER_TYPE_DETAILED varchar(100)
 
 cancer_subtype
 -
 subtype_id int PK
-ONCOTREE_CODE varchar(100)
+ONCOTREE_CODE varchar(100) FK -< cancer_type.ONCOTREE_CODE
 SUBTYPE_MAIN varchar(100)
 SUBTYPE_DETAIL varchar(100)
 ICD_CODE varchar(20)
