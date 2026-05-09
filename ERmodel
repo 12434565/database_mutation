@@ -102,7 +102,7 @@ HGVSp_Short varchar(50)
 Codons varchar(50)
 Protein_position int
 Amino_acid_change varchar(50)
-(mutation_id, Transcript_ID) PK
+(mutation_id,consequence_id,Transcript_ID) PK
 
 
 mutations
