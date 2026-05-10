@@ -2,22 +2,22 @@
 -- USE luad_oncosg;
 --------------------------------------------
 -- if you do something wrong, how to restart:
-SET FOREIGN_KEY_CHECKS = 0;
-DROP TABLE admission;
-DROP TABLE cancer_subtype;
-DROP TABLE cancer_type;
-DROP TABLE consequence;
-DROP TABLE gene;
-DROP TABLE gene_sample;
-DROP TABLE mutation_annotation;
-DROP TABLE mutations;
-DROP TABLE patient;
-DROP TABLE sample;
-DROP TABLE sample_mutation;
-DROP TABLE sample_type;
-DROP TABLE score;
-DROP TABLE treatment;
-SET FOREIGN_KEY_CHECKS = 1;
+-- SET FOREIGN_KEY_CHECKS = 0;
+-- DROP TABLE admission;
+-- DROP TABLE cancer_subtype;
+-- DROP TABLE cancer_type;
+-- DROP TABLE consequence;
+-- DROP TABLE gene;
+-- DROP TABLE gene_mutation;
+-- DROP TABLE gene_sample;
+-- DROP TABLE mutation_annotation;
+-- DROP TABLE mutations;
+-- DROP TABLE patient;
+-- DROP TABLE sample;
+-- DROP TABLE sample_mutation;
+-- DROP TABLE sample_type;
+-- DROP TABLE score;
+-- SET FOREIGN_KEY_CHECKS = 1;
 --------------------------------------------
 -- =========================
 -- 1. patient v
@@ -77,28 +77,14 @@ CREATE TABLE admission (
     OS_MONTHS DECIMAL(6,2),
     patient_age INT,
     STAGE VARCHAR(50),
+    chemotherapy_state BOOLEAN,
+    TKI_TREATMENT BOOLEAN,
     
 
     FOREIGN KEY (PATIENT_ID)
         REFERENCES patient(PATIENT_ID)
         ON DELETE CASCADE
         ON UPDATE CASCADE
-);
-
--- =========================
--- 7. treatment
--- =========================
-CREATE TABLE treatment (
-    treatment_id INT AUTO_INCREMENT PRIMARY KEY,
-    case_id INT,
-    chemotherapy_state BOOLEAN,
-    TKI_TREATMENT BOOLEAN,
-
-    FOREIGN KEY (case_id)
-        REFERENCES admission(case_id)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-
 );
 
 -- =========================
@@ -112,7 +98,7 @@ CREATE TABLE sample (
     SAMPLE_TYPE_ID VARCHAR(50),
     SOMATIC_STATUS VARCHAR(50),
     TMB_NONSYNONYMOUS DECIMAL(10,6),
-    ONCOTREE_CODE VARCHAR(50),
+    subtype_id INT,
     HISTOLOGICAL_GRADE VARCHAR(50),
     EXOME_SEQ VARCHAR(50),
     RNA_SEQ_ANALYSIS VARCHAR(50),
@@ -131,8 +117,8 @@ CREATE TABLE sample (
         ON DELETE SET NULL
         ON UPDATE CASCADE,
 
-    FOREIGN KEY (ONCOTREE_CODE)
-        REFERENCES cancer_type(ONCOTREE_CODE)
+    FOREIGN KEY (subtype_id)
+        REFERENCES cancer_subtype(subtype_id)
         ON DELETE SET NULL
         ON UPDATE CASCADE
 );
@@ -202,8 +188,6 @@ CREATE TABLE mutations (
     Strand CHAR(1),
     NCBI_Build VARCHAR(50),
 
-    gene_id INT,
-
     Variant_Classification VARCHAR(50),
     Variant_Type VARCHAR(50),
     Reference_Allele VARCHAR(50),
@@ -216,11 +200,26 @@ CREATE TABLE mutations (
         Strand,
         Reference_Allele,
         NCBI_Build
-    ),
+    )
+);
+
+-- =========================
+-- 12.5 gene_mutation（多对多）
+-- =========================
+CREATE TABLE gene_mutation (
+    gene_id INT,
+    mutation_id INT,
+
+    PRIMARY KEY (gene_id, mutation_id),
 
     FOREIGN KEY (gene_id)
         REFERENCES gene(gene_id)
-        ON DELETE SET NULL
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    FOREIGN KEY (mutation_id)
+        REFERENCES mutations(mutation_id)
+        ON DELETE CASCADE
         ON UPDATE CASCADE
 );
 
@@ -290,22 +289,22 @@ CREATE TABLE sample_mutation (
 
 -- after this, you should see tables in db, as follows:
 -- mysql> show tables;
--- +-----------------------+
--- | Tables_in_luad_oncosg |
--- +-----------------------+
--- | admission             |
--- | cancer_subtype        |
--- | cancer_type           |
--- | consequence           |
--- | gene                  |
--- | gene_sample           |
--- | mutation_annotation   |
--- | mutations             |
--- | patient               |
--- | sample                |
--- | sample_mutation       |
--- | sample_type           |
--- | score                 |
--- | treatment             |
--- +-----------------------+
--- 14 rows in set (0.01 sec)
+-- +---------------------+
+-- | Tables_in_luad      |
+-- +---------------------+
+-- | admission           |
+-- | cancer_subtype      |
+-- | cancer_type         |
+-- | consequence         |
+-- | gene                |
+-- | gene_mutation       |
+-- | gene_sample         |
+-- | mutation_annotation |
+-- | mutations           |
+-- | patient             |
+-- | sample              |
+-- | sample_mutation     |
+-- | sample_type         |
+-- | score               |
+-- +---------------------+
+-- 14 rows in set (0.00 sec)

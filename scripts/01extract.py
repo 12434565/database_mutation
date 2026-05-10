@@ -6,8 +6,8 @@ import pymysql
 conn = pymysql.connect(
     host="localhost",
     user="root",
-    password="********",
-    database="luad_oncosg"
+    password="Ll268723",
+    database="luad"
 )
 # ================================
 # 根目录
@@ -40,7 +40,7 @@ sample_df = sample_df.rename(columns={"PATIENT_ID": "PATIENT_ID_original"})
 
 
 # ================================
-# 2️⃣ patient 表
+# 2️⃣ patient 表 !!
 # ================================
 patient_df = df[[
     "PATIENT_ID_original",
@@ -53,7 +53,7 @@ patient_df.to_csv(out_patient, index=False)
 
 
 # ================================
-# 3️⃣ subtype（来自 patient）
+# 3️⃣ subtype（来自 patient） !!
 # ================================
 subtype_df = df[[
     "PATIENT_ID_original",
@@ -72,20 +72,16 @@ merged = sample_df.merge(
 
 
 # ================================
-# 5️⃣ subtype 拆分
+# 5️⃣ subtype 拆分 
 # ================================
 def split_subtype(x):
     if pd.isna(x):
         return pd.Series([None, None, None])
-
     raw = x.strip()
-
     code_match = re.search(r"\((\d+)\)", raw)
     icd_code = code_match.group(1) if code_match else None
     raw = re.sub(r"\(\d+\)", "", raw).strip()
-
     raw_lower = raw.lower()
-
     if "micropapillary" in raw_lower:
         main = "Micropapillary adenocarcinoma"
         detail = None
@@ -116,8 +112,33 @@ def split_subtype(x):
             main, detail = raw.split(",", 1)
         else:
             main, detail = raw, None
-
     return pd.Series([main.strip(), detail.strip() if detail else None, icd_code])
+
+
+def normalize_optional_text(value):
+    if pd.isna(value):
+        return None
+    text = str(value).strip()
+    if text == "" or text.lower() in {"na", "nan", "none"}:
+        return None
+    return text
+
+
+def normalize_yes_no_flag(series):
+    cleaned = (
+        series.astype(str)
+        .str.strip()
+        .str.upper()
+        .replace({
+            "YES": 1,
+            "NO": 0,
+            "NA": None,
+            "NAN": None,
+            "NONE": None,
+            "": None
+        })
+    )
+    return pd.to_numeric(cleaned, errors="coerce").astype("Int64")
 
 
 merged[["SUBTYPE_MAIN", "SUBTYPE_DETAIL", "ICD_CODE"]] = \
@@ -125,7 +146,7 @@ merged[["SUBTYPE_MAIN", "SUBTYPE_DETAIL", "ICD_CODE"]] = \
 
 
 # ================================
-# 6️⃣ cancer_type 表
+# 6️⃣ cancer_type 表 !!
 # ================================
 cancer_df = merged[[
     "ONCOTREE_CODE",
@@ -137,7 +158,7 @@ cancer_df.to_csv(out_cancer, index=False)
 
 
 # ================================
-# 7️⃣ subtype 表
+# 7️⃣ subtype 表 !!
 # ================================
 subtype_table = merged[[
     "ONCOTREE_CODE",
@@ -231,7 +252,7 @@ gene_df.to_csv(out_gene, index=False)
 print("✅ gene done")
 # consequence
 # -- =========================
-# -- 13. consequence
+# -- 13. consequence !!
 # -- =========================
 # CREATE TABLE consequence (
 #     consequence_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -278,7 +299,7 @@ print("✅ consequence table done")
 # ---
 # admission_df = df[[ 
 # ================================
-# 8️⃣ admission 表（核心）
+# 8️⃣ admission 表（核心） !!
 # ================================
 
 # 从 patient + sample 合并必要信息
@@ -289,7 +310,9 @@ admission_df = df[[
     "OS_STATUS",
     "OS_MONTHS",
     "AGE",
-    "STAGE"
+    "STAGE",
+    "CHEMOTHERAPY",
+    "TKI_TREATMENT"
 ]].copy()
 
 # 重命名
@@ -317,13 +340,17 @@ admission_df["OS_STATUS"] = (
     .str[0]   # 取前面的 0 或 1
 )
 
-admission_df["OS_STATUS"] = pd.to_numeric(admission_df["OS_STATUS"], errors="coerce")
+admission_df["OS_STATUS"] = pd.to_numeric(admission_df["OS_STATUS"], errors="coerce").astype("Int64")
+admission_df["patient_age"] = pd.to_numeric(admission_df["patient_age"], errors="coerce").astype("Int64")
+admission_df["chemotherapy_state"] = normalize_yes_no_flag(admission_df["CHEMOTHERAPY"])
+admission_df["TKI_TREATMENT"] = normalize_yes_no_flag(admission_df["TKI_TREATMENT"])
 # ================================
 # 去重（关键：一个 patient 一个 admission）
 # ================================
 admission_df = admission_df.drop_duplicates(subset=["PATIENT_ID_original"])
 # ================================
 # 🔥 mapping（最关键一步）
+# before this you need to run 02get_sql_data01.py to get the mapping file from SQL
 # ================================
 # 读取 mapping（你刚刚导出的）
 mapping_path = os.path.join(base_dir, "data/data_from_sql/01patient_mapping.csv")
@@ -358,14 +385,16 @@ admission_df = admission_df[[
     "OS_STATUS",
     "OS_MONTHS",
     "patient_age",
-    "STAGE"
+    "STAGE",
+    "chemotherapy_state",
+    "TKI_TREATMENT"
 ]]
 out_admission = os.path.join(base_dir, "data/07admission_table.csv")
 admission_df.to_csv(out_admission, index=False)
 print("✅ admission table done")
 
 # ================================
-# 9️⃣ sample 表（最终稳定版）
+# 9️⃣ sample 表（最终稳定版）!!
 # ================================
 
 # 1️⃣ 从数据库读取 case mapping（不要用旧CSV）
@@ -384,7 +413,7 @@ case_dict = dict(zip(
 # ================================
 # 2️⃣ 基础数据
 # ================================
-sample_clean = sample_df.copy()
+sample_clean = merged.copy()
 
 sample_clean["PATIENT_ID_original"] = (
     sample_clean["PATIENT_ID_original"]
@@ -402,7 +431,7 @@ sample_clean = sample_clean.merge(
         "EXOME_SEQ",
         "RNA_SEQ_ANALYSIS",
         "SEQUENCING_TYPE"
-    ]],
+    ]].drop_duplicates(subset=["PATIENT_ID_original"]),
     on="PATIENT_ID_original",
     how="left"
 )
@@ -420,11 +449,44 @@ sample_clean["PATIENT_ID"] = sample_clean["PATIENT_ID"].astype(str)
 
 sample_clean["case_id"] = sample_clean["PATIENT_ID"].map(case_dict)
 
+# ================================
+# 6️⃣ subtype mapping（新 ER model）
+# ================================
+subtype_map = pd.read_sql("""
+SELECT
+    subtype_id,
+    ONCOTREE_CODE,
+    SUBTYPE_MAIN,
+    SUBTYPE_DETAIL,
+    ICD_CODE
+FROM cancer_subtype
+""", conn)
+
+subtype_key_cols = [
+    "ONCOTREE_CODE",
+    "SUBTYPE_MAIN",
+    "SUBTYPE_DETAIL",
+    "ICD_CODE"
+]
+
+for col in subtype_key_cols:
+    sample_clean[col] = sample_clean[col].apply(normalize_optional_text)
+    subtype_map[col] = subtype_map[col].apply(normalize_optional_text)
+
+sample_clean = sample_clean.merge(
+    subtype_map,
+    on=subtype_key_cols,
+    how="left"
+)
+
+sample_clean["subtype_id"] = sample_clean["subtype_id"].astype("Int64")
+
 print("⚠️ missing PATIENT_ID:", sample_clean["PATIENT_ID"].isna().sum())
 print("⚠️ missing case_id:", sample_clean["case_id"].isna().sum())
+print("⚠️ missing subtype_id:", sample_clean["subtype_id"].isna().sum())
 
 # ================================
-# 6️⃣ 清洗（关键顺序）
+# 7️⃣ 清洗（关键顺序）
 # ================================
 
 # 🔥 先处理字符串（不要破坏 None）
@@ -447,7 +509,7 @@ sample_clean = sample_clean.replace({
 # sample_clean["SAMPLE_TYPE_ID"] = sample_clean["SAMPLE_TYPE_ID"].replace("", None)
 sample_clean["SAMPLE_TYPE_ID"] = sample_clean["SAMPLE_TYPE_ID"].fillna("Primary")
 # ================================
-# 7️⃣ 列选择
+# 8️⃣ 列选择
 # ================================
 sample_out = sample_clean[[
     "SAMPLE_ID",
@@ -456,7 +518,7 @@ sample_out = sample_clean[[
     "SAMPLE_TYPE_ID",
     "SOMATIC_STATUS",
     "TMB_NONSYNONYMOUS",
-    "ONCOTREE_CODE",
+    "subtype_id",
     "HISTOLOGICAL_GRADE",
     "EXOME_SEQ",
     "RNA_SEQ_ANALYSIS",
@@ -469,15 +531,22 @@ sample_out = sample_out.rename(columns={
 })
 
 # ================================
-# 8️⃣ 保存
+# 9️⃣ 保存
 # ================================
 out_sample = os.path.join(base_dir, "data/08sample_table.csv")
 sample_out.to_csv(out_sample, index=False)
 
 print("✅ sample table done")
 # ================================
-# 🔟 score 表（最终版）
+# 🔟 score 表（最终版）!!
 # ================================
+
+score_map = pd.read_sql(
+    "SELECT Sample_Id, Sample_Id_original FROM sample",
+    conn
+)
+
+print(score_map.head())
 
 # ❗ 不要关连接（conn 还要用）
 # conn.close() 这一行删掉！！！
@@ -565,108 +634,10 @@ out_score = os.path.join(base_dir, "data/09score_table.csv")
 score_out.to_csv(out_score, index=False)
 
 print("✅ score table done")
-
-# ================================
-# 🔟 treatment 表（最终版）
-# ================================
-
-# 1️⃣ 从数据库拿 case mapping
-case_df = pd.read_sql(
-    "SELECT case_id, PATIENT_ID FROM admission",
-    conn
-)
-
-case_df["PATIENT_ID"] = case_df["PATIENT_ID"].astype(str)
-
-case_dict = dict(zip(
-    case_df["PATIENT_ID"],
-    case_df["case_id"]
-))
-
-# ================================
-# 2️⃣ 提取 treatment 信息（来自 patient 文件）
-# ================================
-treatment_df = df[[
-    "PATIENT_ID_original",
-    "TKI_TREATMENT",
-    "CHEMOTHERAPY"
-]].copy()
-
-# ================================
-# 3️⃣ mapping PATIENT_ID → case_id
-# ================================
-treatment_df["PATIENT_ID"] = treatment_df["PATIENT_ID_original"].map(patient_dict)
-treatment_df["PATIENT_ID"] = treatment_df["PATIENT_ID"].astype(str)
-
-treatment_df["case_id"] = treatment_df["PATIENT_ID"].map(case_dict)
-
-print("⚠️ missing case_id:", treatment_df["case_id"].isna().sum())
-
-# ================================
-# 4️⃣ 清洗
-# ================================
-
-# TKI → boolean
-treatment_df["TKI_TREATMENT"] = (
-    treatment_df["TKI_TREATMENT"]
-    .astype(str)
-    .str.strip()
-    .replace({
-        "Yes": 1,
-        "No": 0,
-        "NA": None,
-        "nan": None,   # 🔥 关键
-        "": None
-    })
-)
-
-# 再转成数值（让 None 变 NaN，方便导出）
-treatment_df["TKI_TREATMENT"] = pd.to_numeric(
-    treatment_df["TKI_TREATMENT"],
-    errors="coerce"
-)
-
-# CHEMOTHERAPY → 直接保留字符串（后面做表）
-treatment_df["CHEMOTHERAPY"] = (
-    treatment_df["CHEMOTHERAPY"]
-    .astype(str)
-    .str.strip()
-    .replace({
-        "Yes": 1,
-        "No": 0,
-        "NA": None,
-        "nan": None,
-        "": None
-    })
-)
-
-treatment_df["CHEMOTHERAPY"] = pd.to_numeric(
-    treatment_df["CHEMOTHERAPY"],
-    errors="coerce"
-)
-
-# ================================
-# 5️⃣ 去重（一个 case 一行）
-# ================================
-treatment_df = treatment_df.drop_duplicates(subset=["case_id"])
-
-# ================================
-# 6️⃣ 输出
-# ================================
-treatment_out = treatment_df[[
-    "case_id",
-    "TKI_TREATMENT",
-    "CHEMOTHERAPY"
-]].copy()
-
-out_treatment = os.path.join(base_dir, "data/10treatment_table.csv")
-treatment_out.to_csv(out_treatment, index=False)
-
-print("✅ treatment table done")
 # ================================
 # 🔟 mutation 表（最终版）
 # ================================
-
+conn.commit()
 # 1️⃣ 从数据库拿 gene mapping
 gene_map = pd.read_sql(
     "SELECT gene_id, Hugo_Symbol FROM gene",
@@ -744,35 +715,38 @@ mut_df = mut_df.dropna(subset=[
 ])
 
 # ================================
-# 7️⃣ 去重（匹配你的 UNIQUE 约束）
+# 7️⃣ 为 mutation / gene_mutation 分别准备数据
 # ================================
-mut_df = mut_df.drop_duplicates(subset=[
+mutation_join_keys = [
     "Chromosome",
     "Start_Position",
     "End_Position",
     "Strand",
     "Reference_Allele",
     "NCBI_Build"
-])
+]
+
+gene_mutation_source = mut_df[
+    mutation_join_keys + ["gene_id"]
+].dropna(subset=["gene_id"]).drop_duplicates(
+    subset=mutation_join_keys + ["gene_id"]
+).copy()
+
+mutations_only_df = mut_df.drop_duplicates(subset=mutation_join_keys).copy()
 
 # ================================
 # 8️⃣ 选列（严格对齐 SQL）
 # ================================
-mutation_out = mut_df[[
+mutation_out = mutations_only_df[[
     "Chromosome",
     "Start_Position",
     "End_Position",
     "Strand",
     "NCBI_Build",
-    "gene_id",
     "Variant_Classification",
     "Variant_Type",
     "Reference_Allele"
 ]].copy()
-mut_df["gene_id"] = mut_df["gene_id"].where(
-    pd.notna(mut_df["gene_id"]),
-    None
-)
 # ================================
 # 9️⃣ 保存
 # ================================
@@ -783,9 +757,9 @@ print("✅ mutation table done")
 
 ###################################
 # ================================
-# 🔟 sample_mutation 表（最终稳定版）
+# 🔟 sample_mutation 表（最终稳定版）!!
 # ================================
-
+conn.commit()
 # 1️⃣ mutation mapping（唯一键 → mutation_id）
 mut_map = pd.read_sql("""
 SELECT
@@ -808,12 +782,36 @@ FROM sample
 # ================================
 # 3️⃣ 清洗 mapping（防 join 失败）
 # ================================
-mut_map["Chromosome"] = mut_map["Chromosome"].astype(str).str.strip()
-mut_map["Strand"] = mut_map["Strand"].astype(str).str.strip()
-mut_map["Reference_Allele"] = mut_map["Reference_Allele"].astype(str).str.strip()
-mut_map["NCBI_Build"] = mut_map["NCBI_Build"].astype(str).str.strip()
+for col in ["Chromosome", "Strand", "Reference_Allele", "NCBI_Build"]:
+    mut_map[col] = mut_map[col].apply(normalize_optional_text)
 
-samp_map["Sample_Id_original"] = samp_map["Sample_Id_original"].astype(str).str.strip()
+samp_map["Sample_Id_original"] = samp_map["Sample_Id_original"].apply(normalize_optional_text)
+
+# ================================
+# 3.5️⃣ gene_mutation 表（新 ER model）
+# ================================
+gm_df = gene_mutation_source.merge(
+    mut_map,
+    on=mutation_join_keys,
+    how="left"
+)
+
+print("⚠️ missing mutation_id for gene_mutation:", gm_df["mutation_id"].isna().sum())
+
+gm_df = gm_df.dropna(subset=["gene_id", "mutation_id"])
+gm_df["gene_id"] = gm_df["gene_id"].astype(int)
+gm_df["mutation_id"] = gm_df["mutation_id"].astype(int)
+gm_df = gm_df.drop_duplicates(subset=["gene_id", "mutation_id"])
+
+gene_mutation_out = gm_df[[
+    "gene_id",
+    "mutation_id"
+]].copy()
+
+out_gene_mutation = os.path.join(base_dir, "data/15gene_mutation_table.csv")
+gene_mutation_out.to_csv(out_gene_mutation, index=False)
+
+print("✅ gene_mutation table done")
 
 # ================================
 # 4️⃣ 从 mutation 原始数据取字段
@@ -869,18 +867,9 @@ sm_df = sm_df.merge(
 # ================================
 # 7️⃣ 映射 mutation_id（核心 join）
 # ================================
-join_keys = [
-    "Chromosome",
-    "Start_Position",
-    "End_Position",
-    "Strand",
-    "Reference_Allele",
-    "NCBI_Build"
-]
-
 sm_df = sm_df.merge(
     mut_map,
-    on=join_keys,
+    on=mutation_join_keys,
     how="left"
 )
 
@@ -929,9 +918,9 @@ sm_out.to_csv(out_sm, index=False)
 print("✅ sample_mutation table done")
 
 # ================================
-# 🔟 mutation_annotation 表（最终版）
+# 🔟 mutation_annotation 表（最终版）!!
 # ================================
-
+conn.commit()
 # 1️⃣ mutation mapping（唯一键 → mutation_id）
 mut_map = pd.read_sql("""
 SELECT
@@ -955,7 +944,7 @@ FROM consequence
 # 3️⃣ 清洗 mapping
 # ================================
 for col in ["Chromosome", "Strand", "Reference_Allele", "NCBI_Build"]:
-    mut_map[col] = mut_map[col].astype(str).str.strip()
+    mut_map[col] = mut_map[col].apply(normalize_optional_text)
 
 con_map["consequence_type"] = con_map["consequence_type"].astype(str).str.strip().str.lower()
 
@@ -1015,18 +1004,9 @@ anno_df["consequence_type"] = (
 # ================================
 # 7️⃣ 映射 mutation_id
 # ================================
-join_keys = [
-    "Chromosome",
-    "Start_Position",
-    "End_Position",
-    "Strand",
-    "Reference_Allele",
-    "NCBI_Build"
-]
-
 anno_df = anno_df.merge(
     mut_map,
-    on=join_keys,
+    on=mutation_join_keys,
     how="left"
 )
 
@@ -1084,7 +1064,7 @@ anno_out.to_csv(out_anno, index=False)
 print("✅ mutation_annotation table done")
 
 
-###############gene patch
+###############gene patch!!
 # expression gene
 
 expr_path = os.path.join(
@@ -1137,7 +1117,7 @@ expr_path = os.path.join(
     "[done]data_mrna_seq_v2_rsem_zscores_ref_all_samples.txt"
 )
 expr_df = pd.read_csv(expr_path, sep="\t")
-
+conn.commit()
 # ================================
 # 2️⃣ gene mapping（symbol → gene_id）
 # ================================
