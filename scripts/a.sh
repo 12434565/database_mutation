@@ -1,3 +1,3 @@
 git add *
-git commit -m "change er name"
+git commit -m "readme change"
 git push -u origin main
