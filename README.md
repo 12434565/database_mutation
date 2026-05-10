@@ -100,14 +100,6 @@ Update these files before rerunning the project:
 - `02load_independent_table.sql`
 - `03load_dependent_table.sql`
 
-Important environment note:
-
-- `01extract.py` connects to `luad`
-- `04neo4j11.py` connects to `luad`
-- `02get_sql_data01.py` connects to `luad_oncosg`
-
-Normalize the database name before rerunning the staged workflow.
-
 The hard-coded paths currently look like:
 
 ```text
