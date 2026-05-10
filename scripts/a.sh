@@ -1,3 +1,3 @@
 git add *
-git commit -m "change ER and almost all files "
+git commit -m "change readme"
 git push -u origin main
