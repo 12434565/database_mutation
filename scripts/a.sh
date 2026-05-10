@@ -1,3 +1,3 @@
 git add -A
-git commit -m "add report"
+git commit -m "change report location"
 git push origin main
