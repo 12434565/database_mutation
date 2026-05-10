@@ -1,259 +1,226 @@
-import pandas as pd
-import pymysql
 import os
 
-# ================================
-# 连接数据库
-# ================================
+import pandas as pd
+import pymysql
+
+
 conn = pymysql.connect(
     host="localhost",
     user="root",
-    password="********",
-    database="luad_oncosg"
+    password="Ll268723",
+    database="luad",
 )
 
-out_dir = "/Users/liulin/Desktop/database/project/neo4j1"
-
+out_dir = "/Users/liulin/Desktop/database/github1123/database_mutation/neo4j1"
 os.makedirs(out_dir, exist_ok=True)
 
-# ================================
-# 1️⃣ gene
-# ================================
-gene_df = pd.read_sql("""
-SELECT *
-FROM gene
-WHERE gene_id IS NOT NULL
-""", conn)
 
-gene_df.to_csv(os.path.join(out_dir, "gene.csv"), index=False)
+def export_query(filename, query):
+    df = pd.read_sql(query, conn)
+    df.to_csv(os.path.join(out_dir, filename), index=False)
+    return df
+
 
 # ================================
-# 2️⃣ mutation
+# 1️⃣ base node / edge tables
 # ================================
-mut_df = pd.read_sql("""
-SELECT *
-FROM mutations
-WHERE mutation_id IS NOT NULL AND gene_id IS NOT NULL
-""", conn)
-
-mut_df.to_csv(os.path.join(out_dir, "mutation.csv"), index=False)
-
-# ================================
-# 3️⃣ sample_mutation（核心🔥）
-# ================================
-sm_df = pd.read_sql("""
-SELECT *
-FROM sample_mutation
-WHERE Sample_Id IS NOT NULL AND mutation_id IS NOT NULL
-""", conn)
-
-sm_df.to_csv(os.path.join(out_dir, "sample_mutation.csv"), index=False)
-patient_df = pd.read_sql("""
-SELECT *
-FROM patient
-WHERE PATIENT_ID IS NOT NULL
-""", conn)
-
-patient_df.to_csv(
-    os.path.join(out_dir, "patient.csv"),
-    index=False
-)
-admission_df = pd.read_sql("""
-SELECT *
-FROM admission
-WHERE case_id IS NOT NULL
-""", conn)
-
-admission_df.to_csv(
-    os.path.join(out_dir, "admission.csv"),
-    index=False
-)
-sample_df = pd.read_sql("""
-SELECT * 
-FROM sample
-WHERE Sample_Id IS NOT NULL
-""", conn)
-
-sample_df.to_csv(
-    os.path.join(out_dir, "sample.csv"),
-    index=False
+gene_df = export_query(
+    "gene.csv",
+    """
+    SELECT *
+    FROM gene
+    WHERE gene_id IS NOT NULL
+    """,
 )
 
+mutation_df = export_query(
+    "mutation.csv",
+    """
+    SELECT *
+    FROM mutations
+    WHERE mutation_id IS NOT NULL
+    """,
+)
+
+gene_mutation_df = export_query(
+    "gene_mutation.csv",
+    """
+    SELECT *
+    FROM gene_mutation
+    WHERE gene_id IS NOT NULL
+      AND mutation_id IS NOT NULL
+    """,
+)
+
+sample_mutation_df = export_query(
+    "sample_mutation.csv",
+    """
+    SELECT *
+    FROM sample_mutation
+    WHERE Sample_Id IS NOT NULL
+      AND mutation_id IS NOT NULL
+    """,
+)
+
+patient_df = export_query(
+    "patient.csv",
+    """
+    SELECT *
+    FROM patient
+    WHERE PATIENT_ID IS NOT NULL
+    """,
+)
+
+admission_df = export_query(
+    "admission.csv",
+    """
+    SELECT *
+    FROM admission
+    WHERE case_id IS NOT NULL
+    """,
+)
+
+sample_df = export_query(
+    "sample.csv",
+    """
+    SELECT *
+    FROM sample
+    WHERE Sample_Id IS NOT NULL
+    """,
+)
+
 # =========================
-# read tables
+# mutation_big_table
 # =========================
+mutation_annotation_df = pd.read_sql(
+    """
+    SELECT *
+    FROM mutation_annotation
+    """,
+    conn,
+)
 
-mutation = pd.read_sql("""
-SELECT *
-FROM mutations
-""", conn)
-
-gene = pd.read_sql("""
-SELECT *
-FROM gene
-""", conn)
-
-sample_mutation = pd.read_sql("""
-SELECT *
-FROM sample_mutation
-""", conn)
-
-mutation_annotation = pd.read_sql("""
-SELECT *
-FROM mutation_annotation
-""", conn)
-
-consequence = pd.read_sql("""
-SELECT *
-FROM consequence
-""", conn)
-
-# =========================
-# joins
-# =========================
+consequence_df = pd.read_sql(
+    """
+    SELECT *
+    FROM consequence
+    """,
+    conn,
+)
 
 mutation_big = (
-    sample_mutation
-
-    # mutation info
+    sample_mutation_df
     .merge(
-        mutation,
+        mutation_df,
         on="mutation_id",
-        how="left"
+        how="left",
     )
-
-    # gene info
     .merge(
-        gene,
+        gene_mutation_df,
+        on="mutation_id",
+        how="left",
+    )
+    .merge(
+        gene_df,
         on="gene_id",
-        how="left"
+        how="left",
     )
-
-    # annotation
     .merge(
-        mutation_annotation,
+        mutation_annotation_df,
         on="mutation_id",
-        how="left"
+        how="left",
     )
-
-    # consequence
     .merge(
-        consequence,
+        consequence_df,
         on="consequence_id",
-        how="left"
+        how="left",
     )
 )
-
-# =========================
-# export
-# =========================
 
 mutation_big.to_csv(
     os.path.join(out_dir, "mutation_big_table.csv"),
-    index=False
+    index=False,
 )
 
 print(mutation_big.head())
 print(mutation_big.shape)
 
-import pandas as pd
-import os
-
 # =========================
-# read tables
+# sample_big_table
 # =========================
+sample_type_df = pd.read_sql(
+    """
+    SELECT *
+    FROM sample_type
+    """,
+    conn,
+)
 
-patient = pd.read_sql("SELECT * FROM patient", conn)
+score_df = pd.read_sql(
+    """
+    SELECT *
+    FROM score
+    """,
+    conn,
+)
 
-admission = pd.read_sql("""
-SELECT *
-FROM admission
-""", conn)
+cancer_subtype_df = pd.read_sql(
+    """
+    SELECT *
+    FROM cancer_subtype
+    """,
+    conn,
+)
 
-treatment = pd.read_sql("""
-SELECT *
-FROM treatment
-""", conn)
-
-sample = pd.read_sql("""
-SELECT *
-FROM sample
-""", conn)
-
-sample_type = pd.read_sql("""
-SELECT *
-FROM sample_type
-""", conn)
-
-score = pd.read_sql("""
-SELECT *
-FROM score
-""", conn)
-
-cancer_type = pd.read_sql("""
-SELECT *
-FROM cancer_type
-""", conn)
-
-# =========================
-# joins
-# =========================
+cancer_type_df = pd.read_sql(
+    """
+    SELECT *
+    FROM cancer_type
+    """,
+    conn,
+)
 
 sample_big = (
-    sample
-
-    # admission
+    sample_df
     .merge(
-        admission,
+        admission_df,
         on="case_id",
         how="left",
-        suffixes=("", "_admission")
+        suffixes=("", "_admission"),
     )
-
-    # patient
     .merge(
-        patient,
+        patient_df,
         on="PATIENT_ID",
-        how="left"
+        how="left",
     )
-
-    # treatment
     .merge(
-        treatment,
-        on="case_id",
-        how="left"
-    )
-
-    # sample type
-    .merge(
-        sample_type,
+        sample_type_df,
         on="SAMPLE_TYPE_ID",
-        how="left"
+        how="left",
     )
-
-    # score
     .merge(
-        score,
+        score_df,
         on="Sample_Id",
-        how="left"
+        how="left",
     )
-
-    # cancer type
     .merge(
-        cancer_type,
+        cancer_subtype_df,
+        on="subtype_id",
+        how="left",
+    )
+    .merge(
+        cancer_type_df,
         on="ONCOTREE_CODE",
-        how="left"
+        how="left",
     )
 )
 
-# =========================
-# export
-# =========================
-
 sample_big.to_csv(
     os.path.join(out_dir, "sample_big_table.csv"),
-    index=False
+    index=False,
 )
 
 print(sample_big.head())
 print(sample_big.shape)
+
+conn.close()
