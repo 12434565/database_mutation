@@ -1,5 +1,5 @@
 # Database Report - Lin Liu
-
+**To have a better view, highly recommend click [this link](https://www.notion.so/llsp/Database-Report-Lin-Liu-35a06d13592280d084c8d06f0aa8961c?source=copy_link)**
 # 1 project overview
 
 ## Summary
