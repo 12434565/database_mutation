@@ -9,7 +9,7 @@ conn = pymysql.connect(
     host="localhost",
     user="root",
     password="********",
-    database="luad_oncosg"
+    database="luad"
 )
 
 # =====================
