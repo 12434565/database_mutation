@@ -31,7 +31,6 @@ A staged Python + MySQL project that transforms **LUAD (OncoSG, 2020)** clinical
 | `02load_independent_table.sql` | Loads independent tables such as `patient`, `gene`, and `consequence` |
 | `03load_dependent_table.sql` | Loads dependent tables such as `admission`, `sample`, `mutations`, and relationship tables |
 | `04neo4j11.py` | Exports graph-oriented CSV files from MySQL into `neo4j1/` |
-| `luad_oncosg.sql` | Older SQL dump snapshot |
 | `luad_backup.sql` | Another SQL dump snapshot, closer to the current schema |
 | `ERmodel` | Early plain-text ER draft |
 
@@ -51,11 +50,11 @@ A staged Python + MySQL project that transforms **LUAD (OncoSG, 2020)** clinical
 
 The dataset metadata in `luad_oncosg_2020/useless_files/meta_study.txt` identifies the source as:
 
-- **Study:** Lung Adenocarcinoma (OncoSG, Nat Genet 2020)
-- **Study ID:** `luad_oncosg_2020`
-- **Cancer type:** `LUAD`
-- **PMID:** `32015526`
-- **Description:** Whole-exome and transcriptome sequencing of **305** East Asian lung adenocarcinomas with matched normals
+**Study:** Lung Adenocarcinoma (OncoSG, Nat Genet 2020)  
+**Study ID:** `luad_oncosg_2020`  
+**Cancer type:** `LUAD`  
+**PMID:** `32015526`  
+**Description:** Whole-exome and transcriptome sequencing of **305** East Asian lung adenocarcinomas with matched normals
 
 The main committed raw inputs are:
 
@@ -183,25 +182,11 @@ This route is more reproducible, but it is also more manual because `01extract.p
 
 ## SQL Dump Import Instructions
 
-The repository contains more than one dump snapshot.
-
-### `luad_oncosg.sql`
-
-Use this only if you explicitly want the older historical snapshot.
-
-- includes a standalone `treatment` table
-- does **not** include `gene_mutation`
-
-Example import:
-
-```bash
-mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS luad_oncosg;"
-mysql -u root -p luad_oncosg < /absolute/path/to/database_mutation/luad_oncosg.sql
-```
+The current repository includes `luad_backup.sql` at the root and `sql/luad_backup.sql` as its mirrored copy.
 
 ### `luad_backup.sql`
 
-This dump is closer to the current design than `luad_oncosg.sql` because it already includes `gene_mutation`, but it is still a snapshot rather than the authoritative latest workflow.
+This dump includes `gene_mutation`, so it is closer to the current design than older snapshots, but it is still a snapshot rather than the authoritative latest workflow.
 
 Example import:
 
@@ -213,7 +198,7 @@ mysql -u root -p luad_oncosg < /absolute/path/to/database_mutation/luad_backup.s
 Practical rule:
 
 - use the numbered root scripts if you want the latest scripted workflow
-- use the dump files if you want to restore a historical database state quickly
+- use the dump file if you want to restore a historical database state quickly
 
 ## Diagrams And Documentation
 
